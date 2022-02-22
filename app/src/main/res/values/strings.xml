@@ -1,5 +1,15 @@
 <resources>
     <string name="app_name">ManageU</string>
-    <string name="testing">Testing</string>
-    <string name="test">Testing</string>
+    <string name="app_header">ManageU</string>
+    <string name="app_tagline">your personal productivity manager</string>
+    <string name="login_button">Login</string>
+    <string name="signup_button">Sign Up</string>
+    <string name="copyright">©2022 IIITD</string>
+    <string name="email_enter">email</string>
+    <string name="password_enter">password</string>
+    <string name="name_enter">name</string>
+    <string name="age_enter">age</string>
+    <string name="role_enter">role</string>
+    <string name="pass_enter">password</string>
+    <string name="conf_pass_enter">confirm password</string>
 </resources>
