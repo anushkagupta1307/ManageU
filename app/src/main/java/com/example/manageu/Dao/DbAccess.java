@@ -26,7 +26,7 @@ public class DbAccess extends AsyncTask<Void, Void, Void> {
 
         User u= new User();
         u.name="anushka";
-        u.email="anushka21114@iiitd.ac.in";
+        u.email="anushka21134@iiitd.ac.in";
         u.role="student";
         u.age=24;
         u.password="pass";
