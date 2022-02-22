@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">ManageU</string>
     <string name="testing">Testing</string>
+    <string name="test">Testing</string>
 </resources>
