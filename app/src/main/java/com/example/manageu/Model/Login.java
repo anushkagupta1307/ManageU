@@ -6,21 +6,14 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 @Entity
-public class User {
+public class Login {
+
     @PrimaryKey
     @NonNull
     public String email;
 
-    @ColumnInfo(name = "name")
-    public String name;
-
-    @ColumnInfo(name = "age")
-    public String age;
-
-    @ColumnInfo(name = "role")
-    public String role;
-
-    @ColumnInfo(name = "password")
+    @ColumnInfo(name="password")
     public String password;
+
 
 }

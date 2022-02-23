@@ -1,25 +1,43 @@
 package com.example.manageu;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.room.Room;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
-import com.example.manageu.Dao.AppDatabase;
-import com.example.manageu.Dao.DbAccess;
-import com.example.manageu.Dao.UserDao;
-import com.example.manageu.Model.User;
-
-import java.util.List;
+import com.example.manageu.Dao.RegistrationDbAccess;
 
 public class MainActivity extends AppCompatActivity {
+
+    Button login, signup;
+    Context context=this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        new DbAccess(getApplicationContext()).execute();
+        login= findViewById(R.id.button);
+        signup= findViewById(R.id.button2);
+
+        login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent loginIntent=new Intent(context, LoginPage.class);
+                context.startActivity(loginIntent);
+            }
+        });
+
+        signup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent signupIntent=new Intent(context, SignUpPage.class);
+                context.startActivity(signupIntent);
+            }
+        });
 
     }
 }
