@@ -17,6 +17,7 @@ public class LoginPage extends AppCompatActivity {
     EditText email, password;
     Button login;
     Context context=this;
+    public static String loggedInUserEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,8 +37,9 @@ public class LoginPage extends AppCompatActivity {
             public void onClick(View view) {
                 LoginController loginController=new LoginController(context);
                 boolean isLoginSuccessful= loginController.checkUserLogin(email.getText().toString(),password.getText().toString());
+                loggedInUserEmail=email.getText().toString();
                 if(isLoginSuccessful){
-                    Intent i= new Intent(context, MainActivity.class);
+                    Intent i= new Intent(context, CalendarActivity.class);
                     context.startActivity(i);
                 }
                 else{
