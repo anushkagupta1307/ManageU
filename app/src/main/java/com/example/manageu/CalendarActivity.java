@@ -19,6 +19,8 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
 public class CalendarActivity extends AppCompatActivity {
 
@@ -42,13 +44,23 @@ public class CalendarActivity extends AppCompatActivity {
         long startMillis = 0;
         long endMillis = 0;
         Calendar beginTime = Calendar.getInstance();
+
+        String date = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
+
+        //System.out.println(date);
+        //System.out.println(date.substring(date.length()-2,date.length()));
+        int dayOfMonth=Integer.parseInt(date.substring(date.length()-2,date.length()));
+        //System.out.println(date.substring(date.length()-5,date.length()-3));
+        int monthInNumber=Integer.parseInt(date.substring(date.length()-5,date.length()-3));
+        //System.out.println(monthInNumber);
+
        // beginTime.set(2017, 11, 15, 6, 00);
-        beginTime.set(2022, Calendar.MONTH, Calendar.DATE, 00,00,00);
+        beginTime.set(2022, monthInNumber-1, dayOfMonth, 00,00,00);
 
         System.out.println(beginTime);
         startMillis = beginTime.getTimeInMillis();
         Calendar endTime = Calendar.getInstance();
-        endTime.set(2022, Calendar.MONTH, Calendar.DATE, 23,59,59);
+        endTime.set(2022, monthInNumber-1, dayOfMonth, 23,59,59);
         System.out.println(endTime);
         endMillis = endTime.getTimeInMillis();
         Uri.Builder builder = CalendarContract.Instances.CONTENT_URI.buildUpon();
@@ -58,7 +70,7 @@ public class CalendarActivity extends AppCompatActivity {
 
         Cursor cursor= getContentResolver().query(builder.build(),
                 new String[]{CalendarContract.Calendars._ID,
-                CalendarContract.Events.TITLE,  CalendarContract.Events.DESCRIPTION}, null, null, null);
+                CalendarContract.Events.TITLE,  CalendarContract.Events.DESCRIPTION, CalendarContract.Events.DTSTART,CalendarContract.Events.DTEND}, null, null, null);
 
         String text="";
         if(null!=cursor){
@@ -68,6 +80,23 @@ public class CalendarActivity extends AppCompatActivity {
                   //  text+="Name : "+cursor.getString(1)+"\n";
                     text+="Title : "+cursor.getString(1)+"\n";
                     text+="Description : "+cursor.getString(2)+"\n\n";
+                    long duration=cursor.getLong(4)-cursor.getLong(3);
+                    //System.out.println(cursor.getLong(4));
+                    //System.out.println(cursor.getLong(3));
+
+                    final long milliseconds = duration;
+                    //final long dy = TimeUnit.MILLISECONDS.toDays(milliseconds);
+                    final long hr = TimeUnit.MILLISECONDS.toHours(milliseconds)
+                            - TimeUnit.DAYS.toHours(TimeUnit.MILLISECONDS.toDays(milliseconds));
+                    final long min = TimeUnit.MILLISECONDS.toMinutes(milliseconds)
+                            - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(milliseconds));
+//                    final long sec = TimeUnit.MILLISECONDS.toSeconds(milliseconds)
+//                            - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(milliseconds));
+//                    final long ms = TimeUnit.MILLISECONDS.toMillis(milliseconds)
+//                            - TimeUnit.SECONDS.toMillis(TimeUnit.MILLISECONDS.toSeconds(milliseconds));
+
+
+                    text+="Duration : "+String.format(" %d Hours %d Minutes", hr, min)+"\n\n";
                     cursor.moveToNext();
 
               //      if(CalendarContract.Calendars.NAME.equals(LoginPage.loggedInUserEmail))
@@ -78,7 +107,7 @@ public class CalendarActivity extends AppCompatActivity {
         }
         calendartextView.setText(text);
 
-        insertEventToCalendar("Testing Event", "This is a test event", 5, 30, 6,30);
+        insertEventToCalendar("New Event", "This is a test event", 5, 30, 6,30);
 
     }
 
@@ -98,8 +127,32 @@ public class CalendarActivity extends AppCompatActivity {
 
         ContentValues values= new ContentValues();
         values.put(CalendarContract.Events.CALENDAR_ID, 1);
-        values.put(CalendarContract.Events.DTSTART, Calendar.getInstance().getTimeInMillis());
-        values.put(CalendarContract.Events.DTEND, Calendar.getInstance().getTimeInMillis()+60*60*1000);
+
+        String date = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
+        long startMillis = 0;
+        long endMillis = 0;
+
+        int dayOfMonth=Integer.parseInt(date.substring(date.length()-2,date.length()));
+        //System.out.println(date.substring(date.length()-5,date.length()-3));
+        int monthInNumber=Integer.parseInt(date.substring(date.length()-5,date.length()-3));
+        Calendar beginTime = Calendar.getInstance();
+
+        beginTime.set(2022, monthInNumber-1, dayOfMonth, startHour,startMinute,00);
+        startMillis = beginTime.getTimeInMillis();
+
+        Calendar endTime = Calendar.getInstance();
+
+
+        endTime.set(2022, monthInNumber-1, dayOfMonth, endHour,endMinute,00);
+        endMillis = endTime.getTimeInMillis();
+
+
+
+
+        System.out.println(startMillis);
+        System.out.println(endMillis);
+        values.put(CalendarContract.Events.DTSTART, startMillis);
+        values.put(CalendarContract.Events.DTEND, endMillis);
         values.put(CalendarContract.Events.EVENT_TIMEZONE, Calendar.getInstance().getTimeZone().getID());
         values.put(CalendarContract.Events.TITLE, title);
         values.put(CalendarContract.Events.DESCRIPTION, description);
