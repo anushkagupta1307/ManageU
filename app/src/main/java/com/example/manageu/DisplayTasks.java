@@ -18,10 +18,10 @@ import java.util.Arrays;
 public class DisplayTasks extends Fragment {
 
     RecyclerView recycler_view;
-
-    ArrayList<String> task_list = new ArrayList(Arrays.asList("Study", "Exercise","Photography","Music","Dance"));
-    ArrayList<String> detail_list = new ArrayList(Arrays.asList("Mobile Computing Lec2","Cardio","Bird Photography","Play a song","Zoomba"));
-    ArrayList<String> time_list = new ArrayList(Arrays.asList("2 Hours","45 Minutes","1 Hour","1 Hour","30 Minutes"));
+//
+//    ArrayList<String> task_list = new ArrayList(Arrays.asList("Study", "Exercise","Photography","Music","Dance"));
+//    ArrayList<String> detail_list = new ArrayList(Arrays.asList("Mobile Computing Lec2","Cardio","Bird Photography","Play a song","Zoomba"));
+//    ArrayList<String> time_list = new ArrayList(Arrays.asList("2 Hours","45 Minutes","1 Hour","1 Hour","30 Minutes"));
 
     /*public DisplayTasks() {
         // Required empty public constructor
@@ -44,7 +44,9 @@ public class DisplayTasks extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_display_tasks, container, false);
         recycler_view = view.findViewById(R.id.recycler_view);
-        RecyclerAdapter recyclerAdapter = new RecyclerAdapter(getContext(),task_list,detail_list,time_list);
+
+
+        RecyclerAdapter recyclerAdapter = new RecyclerAdapter(getContext(),TaskActivity.task_list,TaskActivity.detail_list,TaskActivity.time_list);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recycler_view.setLayoutManager(linearLayoutManager);
         RecyclerSpacingDecorator decorator = new RecyclerSpacingDecorator(50);

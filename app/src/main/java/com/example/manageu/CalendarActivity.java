@@ -17,6 +17,8 @@ import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -26,6 +28,9 @@ public class CalendarActivity extends AppCompatActivity {
 
     TextView calendartextView;
    // public static String calendar_id;
+    //public static ArrayList<String> task_list = new ArrayList();
+    //public static ArrayList<String> detail_list = new ArrayList();
+    //public static ArrayList<String> time_list = new ArrayList();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,7 +84,9 @@ public class CalendarActivity extends AppCompatActivity {
                     text+= "ID : "+ cursor.getInt(0)+ "\n";
                   //  text+="Name : "+cursor.getString(1)+"\n";
                     text+="Title : "+cursor.getString(1)+"\n";
+                    //task_list.add(cursor.getString(1));
                     text+="Description : "+cursor.getString(2)+"\n\n";
+                    //detail_list.add(cursor.getString(2));
                     long duration=cursor.getLong(4)-cursor.getLong(3);
                     //System.out.println(cursor.getLong(4));
                     //System.out.println(cursor.getLong(3));
@@ -97,6 +104,7 @@ public class CalendarActivity extends AppCompatActivity {
 
 
                     text+="Duration : "+String.format(" %d Hours %d Minutes", hr, min)+"\n\n";
+                    //time_list.add(String.format(" %d Hours %d Minutes", hr, min));
                     cursor.moveToNext();
 
               //      if(CalendarContract.Calendars.NAME.equals(LoginPage.loggedInUserEmail))
