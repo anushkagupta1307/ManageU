@@ -16,6 +16,9 @@
             android:name=".TaskActivity"
             android:exported="false" />
         <activity
+            android:name=".AddingActivityTab"
+            android:exported="false" />
+        <activity
             android:name=".CalendarActivity"
             android:exported="false" />
         <activity
