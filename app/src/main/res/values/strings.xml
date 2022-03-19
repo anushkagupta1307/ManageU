@@ -8,6 +8,8 @@
     <string name="email_enter">email</string>
     <string name="password_enter">password</string>
     <string name="name_enter">name</string>
+    <string name="ActivityDropdown">Activity(Dropdown)</string>
+    <string name="add">+ Add</string>
     <string name="age_enter">age</string>
     <string name="role_enter">role</string>
     <string name="pass_enter">password</string>
