@@ -10,6 +10,7 @@ import androidx.fragment.app.FragmentTransaction;
 import android.Manifest;
 import android.content.ContentUris;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -33,6 +34,8 @@ import java.util.concurrent.TimeUnit;
 public class TaskActivity extends AppCompatActivity {
 
     BottomNavigationView bottomNavigationView;
+
+    Context context=this;
 
     ProgressFragment progressFragment = new ProgressFragment();
     StatsFragment statsFragment = new StatsFragment();
@@ -136,7 +139,7 @@ public class TaskActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
                     case R.id.tasks:
-                        getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout,new DisplayTasks()).commit();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout,new DisplayTasks(context)).commit();
                         return true;
 
                     case R.id.account:
@@ -157,53 +160,4 @@ public class TaskActivity extends AppCompatActivity {
         bottomNavigationView.setSelectedItemId(R.id.tasks);
     }
 
-    public void insertEventToCalendar(String title, String description, int startHour, int startMinute, int endHour, int endMinute){
-
-
-        //TODO: Check how to put the event to exact date and time
-        //Rest code is working and inserting the event to calendar
-        // Calendar start= Calendar.getInstance();
-        //  start.set(2022, Calendar.MARCH, 3, startHour, startMinute, 00 );
-        // long startMillis=start.getTimeInMillis();
-
-        //Calendar end= Calendar.getInstance();
-        //end.set(2022, Calendar.MARCH,3, endHour, endMinute, 00 );
-        //long endMillis=end.getTimeInMillis();
-
-        ContentValues values= new ContentValues();
-        values.put(CalendarContract.Events.CALENDAR_ID, 1);
-
-        String date = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
-        long startMillis = 0;
-        long endMillis = 0;
-
-        int dayOfMonth=Integer.parseInt(date.substring(date.length()-2,date.length()));
-        //System.out.println(date.substring(date.length()-5,date.length()-3));
-        int monthInNumber=Integer.parseInt(date.substring(date.length()-5,date.length()-3));
-        Calendar beginTime = Calendar.getInstance();
-
-        beginTime.set(2022, monthInNumber-1, dayOfMonth, startHour,startMinute,00);
-        startMillis = beginTime.getTimeInMillis();
-
-        Calendar endTime = Calendar.getInstance();
-
-
-        endTime.set(2022, monthInNumber-1, dayOfMonth, endHour,endMinute,00);
-        endMillis = endTime.getTimeInMillis();
-
-
-
-
-        System.out.println(startMillis);
-        System.out.println(endMillis);
-        values.put(CalendarContract.Events.DTSTART, startMillis);
-        values.put(CalendarContract.Events.DTEND, endMillis);
-        values.put(CalendarContract.Events.EVENT_TIMEZONE, Calendar.getInstance().getTimeZone().getID());
-        values.put(CalendarContract.Events.TITLE, title);
-        values.put(CalendarContract.Events.DESCRIPTION, description);
-
-        Uri uri= getContentResolver().insert(CalendarContract.Events.CONTENT_URI, values);
-        System.out.println(uri);
-
-    }
 }
