@@ -3,6 +3,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 
 import com.example.manageu.Dao.LoginDbAccess;
+import com.example.manageu.Dao.UserProfileAccess;
 import com.example.manageu.Model.Login;
 
 public class LoginController {
@@ -28,6 +29,8 @@ public class LoginController {
             e.printStackTrace();
         }
         if(LoginDbAccess.loginFlag==true){
+            UserProfileAccess userProfileAccess = new UserProfileAccess(context,email);
+            userProfileAccess.execute();
             return true;
         }
         return false;

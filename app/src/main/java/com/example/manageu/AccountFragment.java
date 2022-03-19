@@ -7,6 +7,12 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.example.manageu.Model.CurUser;
+
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -15,6 +21,11 @@ import android.view.ViewGroup;
  */
 public class AccountFragment extends Fragment {
 
+    TextView name ;
+    TextView age ;
+    TextView email ;
+    TextView role;
+    private View view;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -58,7 +69,19 @@ public class AccountFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_account, container, false);
+        view= inflater.inflate(R.layout.fragment_account, container, false);
+        name = view.findViewById(R.id.nameUser);
+        age = view.findViewById(R.id.ageUser);
+        email = view.findViewById(R.id.emailUser);
+        role = view.findViewById(R.id.roleUser);
+        CurUser cur = CurUser.getInstance();
+        name.setText(cur.nam);
+        age.setText("Age: "+cur.age);
+        email.setText("Email: "+cur.em);
+        role.setText("Role: "+cur.rol);
+        return view;
     }
 }

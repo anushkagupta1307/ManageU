@@ -17,6 +17,9 @@ public interface UserDao {
     @Query("SELECT * FROM user WHERE email IN (:emails)")
     List<User> loadAllByIds(String[] emails);
 
+    @Query("SELECT * FROM user WHERE email= :emai")
+    User getUserData(String emai);
+
     @Insert
     void insertAll(User... users);
 
