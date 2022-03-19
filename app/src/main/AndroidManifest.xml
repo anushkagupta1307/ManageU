@@ -13,6 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ManageU">
         <activity
+            android:name=".TaskActivity"
+            android:exported="false" />
+        <activity
             android:name=".CalendarActivity"
             android:exported="false" />
         <activity

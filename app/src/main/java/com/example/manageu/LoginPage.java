@@ -30,8 +30,6 @@ public class LoginPage extends AppCompatActivity {
 
 
 
-
-
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -39,7 +37,8 @@ public class LoginPage extends AppCompatActivity {
                 boolean isLoginSuccessful= loginController.checkUserLogin(email.getText().toString(),password.getText().toString());
                 loggedInUserEmail=email.getText().toString();
                 if(isLoginSuccessful){
-                    Intent i= new Intent(context, CalendarActivity.class);
+                    //Intent i= new Intent(context, CalendarActivity.class);
+                    Intent i= new Intent(context, TaskActivity.class);
                     context.startActivity(i);
                 }
                 else{
