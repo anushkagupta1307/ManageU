@@ -60,47 +60,23 @@ public class AddingActivityTab extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-
-                //new CalendarActivity().insertEventToCalendar("New Event", "This is a test event", 5, 30, 6,30);
-
-
                 List startTime = Arrays.asList(start.getText().toString().split(":"));
                 List endTime = Arrays.asList(end.getText().toString().split(":"));
 
-//                System.out.println(actDrop.getText().toString());
-//                System.out.println(actDetail.getText());
-//                System.out.println(actDetail.getText().toString());
-//                System.out.println(Integer.parseInt(startTime.get(0).toString()));
-//                System.out.println(Integer.parseInt(startTime.get(1).toString()));
-//                System.out.println(Integer.parseInt(endTime.get(0).toString()));
-//                System.out.println(Integer.parseInt(endTime.get(1).toString()));
-
-
                 insertEventToCalendar(actDrop.getSelectedItem().toString(), actDetail.getText().toString(), Integer.parseInt(startTime.get(0).toString()),Integer.parseInt(startTime.get(1).toString()), Integer.parseInt(endTime.get(0).toString()),Integer.parseInt(endTime.get(1).toString()));
+                TaskActivity.id_list.clear();
+                TaskActivity.task_list.clear();
+                TaskActivity.detail_list.clear();
+                TaskActivity.time_list.clear();
                 Intent i= new Intent(context, TaskActivity.class);
                 context.startActivity(i);
 
             }
         });
 
-
-
-
-
     }
 
     public void insertEventToCalendar(String title, String description, int startHour, int startMinute, int endHour, int endMinute){
-
-
-        //TODO: Check how to put the event to exact date and time
-        //Rest code is working and inserting the event to calendar
-        // Calendar start= Calendar.getInstance();
-        //  start.set(2022, Calendar.MARCH, 3, startHour, startMinute, 00 );
-        // long startMillis=start.getTimeInMillis();
-
-        //Calendar end= Calendar.getInstance();
-        //end.set(2022, Calendar.MARCH,3, endHour, endMinute, 00 );
-        //long endMillis=end.getTimeInMillis();
 
         ContentValues values= new ContentValues();
         values.put(CalendarContract.Events.CALENDAR_ID, 1);
@@ -110,7 +86,6 @@ public class AddingActivityTab extends AppCompatActivity {
         long endMillis = 0;
 
         int dayOfMonth=Integer.parseInt(date.substring(date.length()-2,date.length()));
-        //System.out.println(date.substring(date.length()-5,date.length()-3));
         int monthInNumber=Integer.parseInt(date.substring(date.length()-5,date.length()-3));
         Calendar beginTime = Calendar.getInstance();
 

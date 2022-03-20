@@ -1,9 +1,11 @@
 package com.example.manageu;
 
+import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.CalendarContract;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,8 +17,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
+
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.w3c.dom.Text;
@@ -29,17 +30,20 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     private ArrayList<String> task_list;
     private ArrayList<String> detail_list;
     private ArrayList<String> time_list;
+    private ArrayList<Integer> id_list;
+    public static ArrayList<Integer> deleted_list=new ArrayList<>();
     String task;
     String task_detail;
     String time;
     private String TAG = RecyclerAdapter.class.getSimpleName();
 
     BroadcastReceiver brocRec;
-    public RecyclerAdapter(Context context, ArrayList task_list,ArrayList detail_list,ArrayList time_list) {
+    public RecyclerAdapter(Context context, ArrayList task_list,ArrayList detail_list,ArrayList time_list, ArrayList id_list) {
         this.context = context;
         this.task_list = task_list;
         this.detail_list = detail_list;
         this.time_list = time_list;
+        this.id_list= id_list;
     }
 
     @NonNull
@@ -60,7 +64,17 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             @Override
             public void onClick(View view) {
                 AppCompatActivity activity = (AppCompatActivity) view.getContext();
-                Toast.makeText(context.getApplicationContext(), "Delete pressed", Toast.LENGTH_SHORT).show();
+
+               activity.getContentResolver().delete(CalendarContract.Events.CONTENT_URI, CalendarContract.Events.TITLE+"=?", new String[]{task_list.get(holder.getAdapterPosition())});
+            //    System.out.println("id to be deleted");
+              //  System.out.println(id_list.get(holder.getAdapterPosition()));
+              //  deleted_list.add(id_list.get(holder.getAdapterPosition()));
+                TaskActivity.id_list.clear();
+                TaskActivity.task_list.clear();
+                TaskActivity.detail_list.clear();
+                TaskActivity.time_list.clear();
+                Intent i= new Intent(context, TaskActivity.class);
+                context.startActivity(i);
             }
         });
 
