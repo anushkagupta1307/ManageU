@@ -5,15 +5,16 @@
     <string name="login_button">Login</string>
     <string name="signup_button">Sign Up</string>
     <string name="copyright">©2022 IIITD</string>
-    <string name="email_enter">email</string>
-    <string name="password_enter">password</string>
-    <string name="name_enter">name</string>
-    <string name="age_enter">age</string>
-    <string name="role_enter">role</string>
-    <string name="pass_enter">password</string>
-    <string name="conf_pass_enter">confirm password</string>
+    <string name="email_enter">Email</string>
+    <string name="password_enter">Password</string>
+    <string name="name_enter">Name</string>
+    <string name="age_enter">Age</string>
+    <string name="role_enter">Role</string>
+    <string name="pass_enter">Password</string>
+    <string name="conf_pass_enter">Confirm Password</string>
     <string name="add_task">+ ADD TASK</string>
     <string name="add">+ Add</string>
+    <string name="hint_role">Role</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

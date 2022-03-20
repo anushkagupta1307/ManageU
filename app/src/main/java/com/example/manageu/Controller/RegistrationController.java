@@ -1,6 +1,7 @@
 package com.example.manageu.Controller;
 
 import android.content.Context;
+import android.util.Patterns;
 
 import com.example.manageu.Dao.RegistrationDbAccess;
 import com.example.manageu.Model.User;
@@ -18,6 +19,9 @@ public class RegistrationController {
         if(name==null || email== null || role==null|| password==null|| confirmPassword==null)
             return false;
 
+        if(!isEmailValid(email))
+            return false;
+
         if(!password.equals(confirmPassword))
             return false;
 
@@ -32,6 +36,12 @@ public class RegistrationController {
 
         return true;
 
+    }
+
+    public boolean isEmailValid(String email) {
+        if(!Patterns.EMAIL_ADDRESS.matcher(email).matches())
+            return  false;
+        return true;
     }
 
 }

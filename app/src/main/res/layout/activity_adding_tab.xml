@@ -26,27 +26,6 @@
         app:layout_constraintVertical_bias="0.053" />
 
     <EditText
-        android:id="@+id/activityDropDown"
-        android:layout_width="0dp"
-        android:layout_height="49dp"
-        android:layout_marginLeft="25dp"
-        android:layout_marginRight="25dp"
-        android:layout_marginBottom="10dp"
-        android:background="#FFFFFF "
-        android:ems="10"
-        android:fontFamily="@font/roboto_light"
-        android:gravity="center"
-        android:hint="ActivityDropdown"
-        android:inputType="textPersonName"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:layout_constraintVertical_bias="0.073"
-        tools:ignore="TouchTargetSizeCheck" />
-
-    <EditText
         android:id="@+id/activityDetail"
         android:layout_width="0dp"
         android:layout_height="49dp"
@@ -63,8 +42,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/activityDropDown"
-        app:layout_constraintVertical_bias="0.091"
+        app:layout_constraintTop_toBottomOf="@+id/spinner2"
+        app:layout_constraintVertical_bias="0.086"
         tools:ignore="TouchTargetSizeCheck" />
 
     <EditText
@@ -124,5 +103,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/endTime"
         app:layout_constraintVertical_bias="0.401" />
+
+    <Spinner
+        android:id="@+id/spinner2"
+        android:textAlignment="center"
+        android:layout_width="359dp"
+        android:layout_height="55dp"
+        android:background="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.243"
+        android:spinnerMode="dropdown"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

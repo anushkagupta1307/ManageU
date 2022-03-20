@@ -59,7 +59,7 @@ public class DisplayTasks extends Fragment {
         View view = inflater.inflate(R.layout.fragment_display_tasks, container, false);
         recycler_view = view.findViewById(R.id.recycler_view);
 
-        Button addTask= view.findViewById(R.id.button4);
+       /* Button addTask= view.findViewById(R.id.button3);
 
         addTask.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,7 +67,7 @@ public class DisplayTasks extends Fragment {
                 Intent i= new Intent(context, AddingActivityTab.class);
                 context.startActivity(i);
             }
-        });
+        }); */
 
 
         RecyclerAdapter recyclerAdapter = new RecyclerAdapter(getContext(),TaskActivity.task_list,TaskActivity.detail_list,TaskActivity.time_list);

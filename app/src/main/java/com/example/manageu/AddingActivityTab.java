@@ -9,8 +9,12 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.CalendarContract;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
+
+import com.example.manageu.Model.CurUser;
 
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
@@ -21,16 +25,32 @@ import java.util.Locale;
 
 public class AddingActivityTab extends AppCompatActivity {
 
-    EditText actDrop, actDetail, start, end;
+    EditText  actDetail, start, end;
     Button addBtn;
     Context context=this;
+    Spinner actDrop;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_adding_tab);
 
-        actDrop = findViewById(R.id.activityDropDown);
+        actDrop = findViewById(R.id.spinner2);
+
+        CurUser cur = CurUser.getInstance();
+        String role= cur.rol;
+
+        String[] items;
+        if(role.equals("Student")){
+            items= new String[]{"Study", "Sports", "Netflix", "Exercise", "Hobby"};
+        }else if(role.equals("Working Professional")){
+            items=new String[]{"Work", "Meetings","Sports","Exercise","Netflix", "Hobby"};
+        }else{
+            items=new String[]{"Cooking","Cleaning","Exercise","Netflix","Hobby"};
+        }
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
+        actDrop.setAdapter(adapter);
+
         actDetail = findViewById(R.id.activityDetail);
         start = findViewById(R.id.startTime);
         end = findViewById(R.id.endTime);
@@ -56,7 +76,7 @@ public class AddingActivityTab extends AppCompatActivity {
 //                System.out.println(Integer.parseInt(endTime.get(1).toString()));
 
 
-                insertEventToCalendar(actDrop.getText().toString(), actDetail.getText().toString(), Integer.parseInt(startTime.get(0).toString()),Integer.parseInt(startTime.get(1).toString()), Integer.parseInt(endTime.get(0).toString()),Integer.parseInt(endTime.get(1).toString()));
+                insertEventToCalendar(actDrop.getSelectedItem().toString(), actDetail.getText().toString(), Integer.parseInt(startTime.get(0).toString()),Integer.parseInt(startTime.get(1).toString()), Integer.parseInt(endTime.get(0).toString()),Integer.parseInt(endTime.get(1).toString()));
                 Intent i= new Intent(context, TaskActivity.class);
                 context.startActivity(i);
 
