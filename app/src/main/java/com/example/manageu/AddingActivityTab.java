@@ -35,20 +35,21 @@ public class AddingActivityTab extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_adding_tab);
 
-        actDrop = findViewById(R.id.spinner2);
+        actDrop = findViewById(R.id.spinner);
 
         CurUser cur = CurUser.getInstance();
         String role= cur.rol;
 
         String[] items;
         if(role.equals("Student")){
-            items= new String[]{"Study", "Sports", "Netflix", "Exercise", "Hobby"};
+            items= new String[]{"","Study", "Sports", "Netflix", "Exercise", "Hobby"};
         }else if(role.equals("Working Professional")){
-            items=new String[]{"Work", "Meetings","Sports","Exercise","Netflix", "Hobby"};
+            items=new String[]{"","Work", "Meetings","Sports","Exercise","Netflix", "Hobby"};
         }else{
-            items=new String[]{"Cooking","Cleaning","Exercise","Netflix","Hobby"};
+            items=new String[]{"","Cooking","Cleaning","Exercise","Netflix","Hobby"};
         }
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.spinneractivtityfortask, items);
         actDrop.setAdapter(adapter);
 
         actDetail = findViewById(R.id.activityDetail);

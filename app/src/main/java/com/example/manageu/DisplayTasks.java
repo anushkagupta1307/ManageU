@@ -69,7 +69,7 @@ public class DisplayTasks extends Fragment {
             }
         }); */
 
-
+        TaskActivity.addTask.setVisibility(View.VISIBLE);
         RecyclerAdapter recyclerAdapter = new RecyclerAdapter(getContext(),TaskActivity.task_list,TaskActivity.detail_list,TaskActivity.time_list);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recycler_view.setLayoutManager(linearLayoutManager);

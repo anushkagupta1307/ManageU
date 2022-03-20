@@ -41,6 +41,8 @@ public class TaskActivity extends AppCompatActivity {
     StatsFragment statsFragment = new StatsFragment();
     AccountFragment accountFragment = new AccountFragment();
 
+    public static Button addTask;
+
     public static ArrayList<String> task_list = new ArrayList();
     public static ArrayList<String> detail_list = new ArrayList();
     public static ArrayList<String> time_list = new ArrayList();
@@ -162,7 +164,9 @@ public class TaskActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_task);
 
-        Button addTask= findViewById(R.id.button3);
+        addTask= findViewById(R.id.button3);
+
+        addTask.setVisibility(View.VISIBLE);
 
         addTask.setOnClickListener(new View.OnClickListener() {
             @Override

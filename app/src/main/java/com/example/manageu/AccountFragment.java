@@ -70,7 +70,7 @@ public class AccountFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-
+        TaskActivity.addTask.setVisibility(View.INVISIBLE);
         // Inflate the layout for this fragment
         view= inflater.inflate(R.layout.fragment_account, container, false);
         name = view.findViewById(R.id.nameUser);
@@ -78,10 +78,10 @@ public class AccountFragment extends Fragment {
         email = view.findViewById(R.id.emailUser);
         role = view.findViewById(R.id.roleUser);
         CurUser cur = CurUser.getInstance();
-        name.setText(cur.nam);
-        age.setText("Age: "+cur.age);
-        email.setText("Email: "+cur.em);
-        role.setText("Role: "+cur.rol);
+        name.setText("Name : "+cur.nam.toUpperCase());
+        age.setText("Age : "+cur.age);
+        email.setText("Email : "+cur.em);
+        role.setText("Role : "+cur.rol);
         return view;
     }
 }
