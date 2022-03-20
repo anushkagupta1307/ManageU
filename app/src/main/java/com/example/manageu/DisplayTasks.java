@@ -47,6 +47,8 @@ public class DisplayTasks extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        TaskActivity.addTask.setVisibility(View.VISIBLE);
         View view = inflater.inflate(R.layout.fragment_display_tasks, container, false);
         recycler_view = view.findViewById(R.id.recycler_view);
 
