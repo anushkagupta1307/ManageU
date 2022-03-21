@@ -13,23 +13,29 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ManageU">
         <activity
+            android:configChanges="orientation|screenSize"
             android:name=".AddingActivityTab"
             android:exported="false" />
         <activity
+            android:configChanges="orientation|screenSize"
             android:name=".TaskActivity"
             android:exported="false" />
         <activity
+            android:configChanges="orientation|screenSize"
             android:name=".CalendarActivity"
             android:exported="false" />
         <activity
+            android:configChanges="orientation|screenSize"
             android:name=".SignUpPage"
             android:exported="false" />
         <activity
+            android:configChanges="orientation|screenSize"
             android:name=".LoginPage"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:exported="true">
+            android:exported="true"
+            android:configChanges="orientation|screenSize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
