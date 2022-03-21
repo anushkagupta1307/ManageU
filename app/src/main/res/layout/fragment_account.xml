@@ -121,6 +121,16 @@
 
         </androidx.cardview.widget.CardView>
 
+        <Button
+            android:layout_width="match_parent"
+            android:id="@+id/logout"
+            android:layout_height="wrap_content"
+            android:text="Logout"
+            android:gravity="center"
+            android:textAlignment="center"
+            android:textSize="18sp"
+            android:layout_margin="10dp"/>
+
     </LinearLayout>
     </LinearLayout>
 </ScrollView>

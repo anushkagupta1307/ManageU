@@ -40,7 +40,7 @@ public class TaskActivity extends AppCompatActivity {
 
     ProgressFragment progressFragment = new ProgressFragment();
     StatsFragment statsFragment = new StatsFragment();
-    AccountFragment accountFragment = new AccountFragment();
+    AccountFragment accountFragment = new AccountFragment(context);
 
     public static Button addTask;
 
