@@ -9,10 +9,10 @@ public class CurUser {
 
     private CurUser()
     {
-        nam = "";
-        age="";
-        em="";
-        rol="";
+        nam = "Nitin";
+        age="22";
+        em="nitin@gmail.com";
+        rol="Student";
     }
 
     public static CurUser getInstance(){
