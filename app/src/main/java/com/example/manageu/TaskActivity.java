@@ -122,23 +122,23 @@ public class TaskActivity extends AppCompatActivity {
 //                            - TimeUnit.SECONDS.toMillis(TimeUnit.MILLISECONDS.toSeconds(milliseconds));
 
                             if (hr == 0 && min > 1) {
-                                text += "Duration : " + String.format(" %d Minutes", hr, min) + "\n\n";
-                                time_list.add(String.format(" %d Minutes", hr, min));
+                                text += "Duration : " + String.format(" %d Minutes",min) + "\n\n";
+                                time_list.add(String.format(" %d Minutes", min));
                             } else if (hr == 0 && min == 1) {
-                                text += "Duration : " + String.format(" %d Minute", hr, min) + "\n\n";
-                                time_list.add(String.format(" %d Minute", hr, min));
+                                text += "Duration : " + String.format(" %d Minute", min) + "\n\n";
+                                time_list.add(String.format(" %d Minute", min));
                             } else if (hr > 1 && min == 1) {
                                 text += "Duration : " + String.format(" %d Hours %d Minute", hr, min) + "\n\n";
                                 time_list.add(String.format(" %d Hours %d Minute", hr, min));
                             } else if (hr == 1 && min == 0) {
-                                text += "Duration : " + String.format(" %d Hour", hr, min) + "\n\n";
-                                time_list.add(String.format(" %d Hour", hr, min));
+                                text += "Duration : " + String.format(" %d Hour", hr) + "\n\n";
+                                time_list.add(String.format(" %d Hour", hr));
                             } else if (hr == 1 && min > 1) {
                                 text += "Duration : " + String.format(" %d Hour %d Minutes", hr, min) + "\n\n";
                                 time_list.add(String.format(" %d Hour %d Minutes", hr, min));
                             } else if (min == 0 && hr > 1) {
-                                text += "Duration : " + String.format(" %d Hours", hr, min) + "\n\n";
-                                time_list.add(String.format(" %d Hours", hr, min));
+                                text += "Duration : " + String.format(" %d Hours", hr) + "\n\n";
+                                time_list.add(String.format(" %d Hours", hr));
                             } else {
                                 text += "Duration : " + String.format(" %d Hours %d Minutes", hr, min) + "\n\n";
                                 time_list.add(String.format(" %d Hours %d Minutes", hr, min));
