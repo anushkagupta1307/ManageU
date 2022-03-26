@@ -43,7 +43,7 @@ public class ProgressFragment extends Fragment {
         FetchDoneTasksDbAccess fetchDoneTasksDbAccess =new FetchDoneTasksDbAccess(getContext());
         fetchDoneTasksDbAccess.execute();
         try {
-            Thread.sleep(1000);
+            Thread.sleep(100);
         }
         catch (Exception e){
         }
@@ -128,12 +128,37 @@ public class ProgressFragment extends Fragment {
            System.out.println("Total Exercise Done"+totalExerciseDone);
            System.out.println("Total Hobby Done "+totalHobbyDone);
 
-           float studyProductivity= (totalStudyDone/totalStudy)*100;
-           float sportsProductivity=(totalSportsDone/totalSports)*100;
-           float netflixProductivity=(totalNetflixDone/totalNetflix)*100;
-           float exerciseProductivity=(totalExerciseDone/totalExercise)*100;
-           float hobbyProductivity=(totalHobbyDone/totalHobby)*100;
-           float averageProductivity=(studyProductivity+sportsProductivity+netflixProductivity+exerciseProductivity+hobbyProductivity)/5;
+           float studyProductivity= totalStudy!=0?(totalStudyDone/totalStudy)*100:0;
+           float sportsProductivity=totalSports!=0?(totalSportsDone/totalSports)*100:0;
+           float netflixProductivity=totalNetflix!=0?(totalNetflixDone/totalNetflix)*100:0;
+           float exerciseProductivity=totalExercise!=0?(totalExerciseDone/totalExercise)*100:0;
+           float hobbyProductivity=totalHobby!=0?(totalHobbyDone/totalHobby)*100:0;
+
+           float totalProductivity=0;
+           int count=0;
+           if(totalStudy!=0) {
+               totalProductivity += studyProductivity;
+                count++;
+           }
+           if(totalSports!=0){
+               totalProductivity+=sportsProductivity;
+               count++;
+           }
+           if(totalNetflix!=0){
+               totalProductivity+=netflixProductivity;
+               count++;
+           }
+           if(totalExercise!=0){
+               totalProductivity+=exerciseProductivity;
+               count++;
+           }
+           if(totalHobby!=0){
+               totalProductivity+=hobbyProductivity;
+               count++;
+           }
+
+           float averageProductivity=totalProductivity/count;
+
 
            System.out.println("Study Productivity"+studyProductivity);
            System.out.println("Sports Productivity"+sportsProductivity);
@@ -228,14 +253,40 @@ public class ProgressFragment extends Fragment {
            System.out.println("Total Netflix Done"+totalNetflixDone);
            System.out.println("Total Hobby Done"+totalHobbyDone);
 
-           float workProductivity= (totalWorkDone/totalWork)*100;
-           float meetingsProductivity=(totalMeetingsDone/totalMeetings)*100;
-           float sportsProductivity=(totalSportsDone/totalSports)*100;
-           float exerciseProductivity=(totalExerciseDone/totalExercise)*100;
-           float netflixProductivity=(totalNetflixDone/totalNetflix)*100;
-           float hobbyProductivity=(totalHobbyDone/totalHobby)*100;
-           float averageProductivity=(workProductivity+meetingsProductivity+sportsProductivity+netflixProductivity+exerciseProductivity+hobbyProductivity)/6;
+           float workProductivity= totalWork!=0?(totalWorkDone/totalWork)*100:0;
+           float meetingsProductivity=totalMeetings!=0?(totalMeetingsDone/totalMeetings)*100:0;
+           float sportsProductivity=totalSports!=0?(totalSportsDone/totalSports)*100:0;
+           float exerciseProductivity=totalExercise!=0?(totalExerciseDone/totalExercise)*100:0;
+           float netflixProductivity=totalNetflix!=0?(totalNetflixDone/totalNetflix)*100:0;
+           float hobbyProductivity=totalHobby!=0?(totalHobbyDone/totalHobby)*100:0;
 
+           float totalProductivity=0;
+           int count=0;
+           if(totalWork!=0) {
+               totalProductivity += workProductivity;
+               count++;
+           }
+           if(totalMeetings!=0){
+               totalProductivity+=meetingsProductivity;
+               count++;
+           }
+           if(totalSports!=0){
+               totalProductivity+=sportsProductivity;
+               count++;
+           }
+           if(totalNetflix!=0){
+               totalProductivity+=netflixProductivity;
+               count++;
+           }
+           if(totalExercise!=0){
+               totalProductivity+=exerciseProductivity;
+               count++;
+           }
+           if(totalHobby!=0){
+               totalProductivity+=hobbyProductivity;
+               count++;
+           }
+           float averageProductivity=totalProductivity/count;
            System.out.println("Work Productivity"+workProductivity);
            System.out.println("Meetings Productivity"+meetingsProductivity);
            System.out.println("Sports Productivity"+sportsProductivity);
@@ -320,12 +371,36 @@ public class ProgressFragment extends Fragment {
            System.out.println("Total Netflix Done"+totalNetflixDone);
            System.out.println("Total Hobby Done"+totalHobbyDone);
 
-           float cookingProductivity= (totalCookingDone/totalCooking)*100;
-           float cleaningProductivity=(totalCleaningDone/totalCleaning)*100;
-           float exerciseProductivity=(totalExerciseDone/totalExercise)*100;
-           float netflixProductivity=(totalNetflixDone/totalNetflix)*100;
-           float hobbyProductivity=(totalHobbyDone/totalHobby)*100;
-           float averageProductivity=(cookingProductivity+cleaningProductivity+exerciseProductivity+netflixProductivity+hobbyProductivity)/5;
+           float cookingProductivity= totalCooking!=0?(totalCookingDone/totalCooking)*100:0;
+           float cleaningProductivity=totalCleaning!=0?(totalCleaningDone/totalCleaning)*100:0;
+           float exerciseProductivity=totalExercise!=0?(totalExerciseDone/totalExercise)*100:0;
+           float netflixProductivity=totalNetflix!=0?(totalNetflixDone/totalNetflix)*100:0;
+           float hobbyProductivity=totalHobby!=0?(totalHobbyDone/totalHobby)*100:0;
+           float totalProductivity=0;
+           int count=0;
+           if(totalCooking!=0) {
+               totalProductivity += cookingProductivity;
+               count++;
+           }
+           if(totalCleaning!=0){
+               totalProductivity+=cleaningProductivity;
+               count++;
+           }
+           if(totalNetflix!=0){
+               totalProductivity+=netflixProductivity;
+               count++;
+           }
+           if(totalExercise!=0){
+               totalProductivity+=exerciseProductivity;
+               count++;
+           }
+           if(totalHobby!=0){
+               totalProductivity+=hobbyProductivity;
+               count++;
+           }
+
+           float averageProductivity=totalProductivity/count;
+
 
            System.out.println("Cooking Productivity"+cookingProductivity);
            System.out.println("Cleaning Productivity"+cleaningProductivity);

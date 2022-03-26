@@ -78,7 +78,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         FetchDoneTaskIdsDbAccess fetchDoneTaskIdsDbAccess =new FetchDoneTaskIdsDbAccess(context.getApplicationContext());
         fetchDoneTaskIdsDbAccess.execute();
         try {
-            Thread.sleep(1000);
+            Thread.sleep(100);
         }
         catch (Exception e){
         }
