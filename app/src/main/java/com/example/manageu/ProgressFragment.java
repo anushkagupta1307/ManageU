@@ -133,12 +133,14 @@ public class ProgressFragment extends Fragment {
            float netflixProductivity=(totalNetflixDone/totalNetflix)*100;
            float exerciseProductivity=(totalExerciseDone/totalExercise)*100;
            float hobbyProductivity=(totalHobbyDone/totalHobby)*100;
+           float averageProductivity=(studyProductivity+sportsProductivity+netflixProductivity+exerciseProductivity+hobbyProductivity)/5;
 
            System.out.println("Study Productivity"+studyProductivity);
            System.out.println("Sports Productivity"+sportsProductivity);
            System.out.println("Netflix Productivity "+netflixProductivity);
            System.out.println("Exercise Productivity"+exerciseProductivity);
            System.out.println("Hobby Productivity "+hobbyProductivity);
+           System.out.println("Average Productivity "+averageProductivity);
 
         }else if(loggedUser.role.equals("Working Professional"))
        {
@@ -232,6 +234,7 @@ public class ProgressFragment extends Fragment {
            float exerciseProductivity=(totalExerciseDone/totalExercise)*100;
            float netflixProductivity=(totalNetflixDone/totalNetflix)*100;
            float hobbyProductivity=(totalHobbyDone/totalHobby)*100;
+           float averageProductivity=(workProductivity+meetingsProductivity+sportsProductivity+netflixProductivity+exerciseProductivity+hobbyProductivity)/6;
 
            System.out.println("Work Productivity"+workProductivity);
            System.out.println("Meetings Productivity"+meetingsProductivity);
@@ -239,6 +242,7 @@ public class ProgressFragment extends Fragment {
            System.out.println("Exercise Productivity"+exerciseProductivity);
            System.out.println("Netflix Productivity "+netflixProductivity);
            System.out.println("Hobby Productivity "+hobbyProductivity);
+           System.out.println("Average Productivity "+averageProductivity);
 
        }else {
 
@@ -321,12 +325,14 @@ public class ProgressFragment extends Fragment {
            float exerciseProductivity=(totalExerciseDone/totalExercise)*100;
            float netflixProductivity=(totalNetflixDone/totalNetflix)*100;
            float hobbyProductivity=(totalHobbyDone/totalHobby)*100;
+           float averageProductivity=(cookingProductivity+cleaningProductivity+exerciseProductivity+netflixProductivity+hobbyProductivity)/5;
 
            System.out.println("Cooking Productivity"+cookingProductivity);
            System.out.println("Cleaning Productivity"+cleaningProductivity);
            System.out.println("Netflix Productivity "+netflixProductivity);
            System.out.println("Exercise Productivity"+exerciseProductivity);
            System.out.println("Hobby Productivity "+hobbyProductivity);
+           System.out.println("Average Productivity "+averageProductivity);
 
        }
 
