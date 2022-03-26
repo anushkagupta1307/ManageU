@@ -1,17 +1,13 @@
 package com.example.manageu;
 
-import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.provider.CalendarContract;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,10 +16,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import org.w3c.dom.Text;
+import com.example.manageu.Dao.DoneTaskDbAccess;
+import com.example.manageu.Dao.FetchDoneTaskIdsDbAccess;
+import com.example.manageu.Model.DoneTask;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     Context context;
@@ -78,17 +75,41 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             }
         });
 
-        holderclass.done.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                AppCompatActivity activity = (AppCompatActivity) view.getContext();
-                Toast.makeText(context.getApplicationContext(), "Done pressed", Toast.LENGTH_SHORT).show();
-                holderclass.done.setVisibility(View.GONE);
-                holderclass.delete.setVisibility(View.GONE);
-                holderclass.taskdone.setVisibility(View.VISIBLE);
-                holderclass.taskdone.setText("Task Completed");
-            }
-        });
+        FetchDoneTaskIdsDbAccess fetchDoneTaskIdsDbAccess =new FetchDoneTaskIdsDbAccess(context.getApplicationContext());
+        fetchDoneTaskIdsDbAccess.execute();
+        try {
+            Thread.sleep(1000);
+        }
+        catch (Exception e){
+        }
+       if(FetchDoneTaskIdsDbAccess.doneTaskList.contains(id_list.get(holder.getAdapterPosition()))){
+           holderclass.done.setVisibility(View.GONE);
+           holderclass.delete.setVisibility(View.GONE);
+           holderclass.taskdone.setVisibility(View.VISIBLE);
+           holderclass.taskdone.setText("Task Completed");
+       }else {
+           holderclass.done.setVisibility(View.VISIBLE);
+           holderclass.done.setOnClickListener(new View.OnClickListener() {
+               @Override
+               public void onClick(View view) {
+                   AppCompatActivity activity = (AppCompatActivity) view.getContext();
+                   Toast.makeText(context.getApplicationContext(), "Done pressed", Toast.LENGTH_SHORT).show();
+                   holderclass.done.setVisibility(View.GONE);
+                   holderclass.delete.setVisibility(View.GONE);
+                   holderclass.taskdone.setVisibility(View.VISIBLE);
+                   holderclass.taskdone.setText("Task Completed");
+
+                   DoneTask doneTask = new DoneTask();
+                   doneTask.id = id_list.get(holder.getAdapterPosition());
+                   doneTask.user_email = LoginPage.loggedInUserEmail;
+                   doneTask.done = 1;
+                   doneTask.time=time_list.get(holder.getAdapterPosition());
+                   doneTask.title=task_list.get(holder.getAdapterPosition());
+                   DoneTaskDbAccess doneTaskDbAccess = new DoneTaskDbAccess(context.getApplicationContext(), doneTask);
+                   doneTaskDbAccess.execute();
+               }
+           });
+       }
 
     }
 

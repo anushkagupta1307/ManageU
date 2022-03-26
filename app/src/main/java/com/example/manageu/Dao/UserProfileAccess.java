@@ -12,6 +12,8 @@ public class   UserProfileAccess extends AsyncTask<Void, Void,Void> {
 
     public static boolean loginFlag=false;
 
+    public static User loggedInUser;
+
     Context context;
     String em;
     public UserProfileAccess(Context context, String em){
@@ -27,6 +29,7 @@ public class   UserProfileAccess extends AsyncTask<Void, Void,Void> {
 
         UserDao userDao = db.userDao();
         User user=userDao.getUserData(this.em);
+        loggedInUser=user;
         CurUser curUser = CurUser.getInstance();
         curUser.nam=user.name;
         curUser.em= user.email;

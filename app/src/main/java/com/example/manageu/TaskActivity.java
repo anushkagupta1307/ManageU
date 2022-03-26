@@ -3,13 +3,9 @@ package com.example.manageu;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
-import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 import android.Manifest;
 import android.content.ContentUris;
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -21,6 +17,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.manageu.Controller.LoginController;
+import com.example.manageu.Dao.DeleteTasksDbAccess;
+import com.example.manageu.Dao.TaskDbAccess;
+import com.example.manageu.Model.CurUser;
+import com.example.manageu.Model.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
@@ -28,7 +29,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashSet;
+import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
@@ -48,7 +49,7 @@ public class TaskActivity extends AppCompatActivity {
     public static ArrayList<String> detail_list = new ArrayList();
     public static ArrayList<String> time_list = new ArrayList();
     public static ArrayList<Integer> id_list = new ArrayList();
-
+    public static List<Task> taskList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,9 +90,8 @@ public class TaskActivity extends AppCompatActivity {
                 new String[]{CalendarContract.Calendars._ID,
                         CalendarContract.Events.TITLE,  CalendarContract.Events.DESCRIPTION, CalendarContract.Events.DTSTART,CalendarContract.Events.DTEND}, null, null, null);
 
-        ArrayList<Integer> deleted_details= RecyclerAdapter.deleted_list;
-
         String text="";
+        taskList=new ArrayList<>();
         if(null!=cursor){
             if(cursor.moveToFirst()){
                 for(int i=0;i<cursor.getCount();i++){
@@ -116,42 +116,56 @@ public class TaskActivity extends AppCompatActivity {
                                     - TimeUnit.DAYS.toHours(TimeUnit.MILLISECONDS.toDays(milliseconds));
                             final long min = TimeUnit.MILLISECONDS.toMinutes(milliseconds)
                                     - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(milliseconds));
-//                    final long sec = TimeUnit.MILLISECONDS.toSeconds(milliseconds)
-//                            - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(milliseconds));
-//                    final long ms = TimeUnit.MILLISECONDS.toMillis(milliseconds)
-//                            - TimeUnit.SECONDS.toMillis(TimeUnit.MILLISECONDS.toSeconds(milliseconds));
 
+
+                    String time;
                             if (hr == 0 && min > 1) {
                                 text += "Duration : " + String.format(" %d Minutes",min) + "\n\n";
                                 time_list.add(String.format(" %d Minutes", min));
+                                time=String.format(" %d Minutes", min);
                             } else if (hr == 0 && min == 1) {
                                 text += "Duration : " + String.format(" %d Minute", min) + "\n\n";
                                 time_list.add(String.format(" %d Minute", min));
+                                time= String.format(" %d Minute", min);
                             } else if (hr > 1 && min == 1) {
                                 text += "Duration : " + String.format(" %d Hours %d Minute", hr, min) + "\n\n";
                                 time_list.add(String.format(" %d Hours %d Minute", hr, min));
+                                time= String.format(" %d Hours %d Minute", hr, min);
                             } else if (hr == 1 && min == 0) {
                                 text += "Duration : " + String.format(" %d Hour", hr) + "\n\n";
                                 time_list.add(String.format(" %d Hour", hr));
+                                time= String.format(" %d Hour", hr);
                             } else if (hr == 1 && min > 1) {
                                 text += "Duration : " + String.format(" %d Hour %d Minutes", hr, min) + "\n\n";
                                 time_list.add(String.format(" %d Hour %d Minutes", hr, min));
+                                time= String.format(" %d Hour %d Minutes", hr, min);
                             } else if (min == 0 && hr > 1) {
                                 text += "Duration : " + String.format(" %d Hours", hr) + "\n\n";
                                 time_list.add(String.format(" %d Hours", hr));
+                                time= String.format(" %d Hours", hr);
                             } else {
                                 text += "Duration : " + String.format(" %d Hours %d Minutes", hr, min) + "\n\n";
                                 time_list.add(String.format(" %d Hours %d Minutes", hr, min));
+                                time= String.format(" %d Hours %d Minutes", hr, min);
                             }
-              //          }
 
+                    Task task= new Task();
+                    task.id=cursor.getInt(0);
+                    task.title=cursor.getString(1);
+                    task.detail=cursor.getString(2);
+                    task.time=time;
+                    task.user_email= LoginPage.loggedInUserEmail;
+                    taskList.add(task);
                     cursor.moveToNext();
-
 
                 }
             }
         }
+        DeleteTasksDbAccess deleteTasksDbAccess=new DeleteTasksDbAccess(context, LoginPage.loggedInUserEmail);
+        deleteTasksDbAccess.execute();
 
+        TaskDbAccess taskDbAccess=new TaskDbAccess(context,taskList);
+        taskDbAccess.execute();
 
         setContentView(R.layout.activity_task);
 
