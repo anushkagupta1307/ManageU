@@ -1,5 +1,6 @@
 package com.example.manageu;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -10,6 +11,8 @@ import android.view.ViewGroup;
 
 
 import com.example.manageu.Dao.FetchDoneTasksDbAccess;
+import com.example.manageu.Dao.FetchStatsListDbAccess;
+import com.example.manageu.Dao.UpdateStatsListDbAccess;
 import com.example.manageu.Dao.UserProfileAccess;
 import com.example.manageu.Model.DoneTask;
 import com.example.manageu.Model.Task;
@@ -32,15 +35,15 @@ public class ProgressFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         TaskActivity.addTask.setVisibility(View.INVISIBLE);
-        calculateProductivityPercentage();
+        calculateProductivityPercentage(getContext());
         return inflater.inflate(R.layout.fragment_progress, container, false);
     }
 
-    public void calculateProductivityPercentage(){
+    public static void calculateProductivityPercentage(Context context){
 
         List<Task> taskList= TaskActivity.taskList;
 
-        FetchDoneTasksDbAccess fetchDoneTasksDbAccess =new FetchDoneTasksDbAccess(getContext());
+        FetchDoneTasksDbAccess fetchDoneTasksDbAccess =new FetchDoneTasksDbAccess(context);
         fetchDoneTasksDbAccess.execute();
         try {
             Thread.sleep(100);
@@ -51,6 +54,8 @@ public class ProgressFragment extends Fragment {
         List<DoneTask> doneTasks= FetchDoneTasksDbAccess.doneTaskListOfObjects;
 
        User loggedUser= UserProfileAccess.loggedInUser;
+        FetchStatsListDbAccess fetchStatsListDbAccess=new FetchStatsListDbAccess(context);
+        fetchStatsListDbAccess.execute();
 
        if (loggedUser.role.equals("Student")){
 
@@ -159,13 +164,15 @@ public class ProgressFragment extends Fragment {
 
            float averageProductivity=totalProductivity/count;
 
-
            System.out.println("Study Productivity"+studyProductivity);
            System.out.println("Sports Productivity"+sportsProductivity);
            System.out.println("Netflix Productivity "+netflixProductivity);
            System.out.println("Exercise Productivity"+exerciseProductivity);
            System.out.println("Hobby Productivity "+hobbyProductivity);
            System.out.println("Average Productivity "+averageProductivity);
+
+           FetchStatsListDbAccess.user_stats.add(averageProductivity);
+
 
         }else if(loggedUser.role.equals("Working Professional"))
        {
@@ -295,6 +302,8 @@ public class ProgressFragment extends Fragment {
            System.out.println("Hobby Productivity "+hobbyProductivity);
            System.out.println("Average Productivity "+averageProductivity);
 
+           FetchStatsListDbAccess.user_stats.add(averageProductivity);
+
        }else {
 
            float totalCooking=0;
@@ -409,11 +418,16 @@ public class ProgressFragment extends Fragment {
            System.out.println("Hobby Productivity "+hobbyProductivity);
            System.out.println("Average Productivity "+averageProductivity);
 
+           FetchStatsListDbAccess.user_stats.add(averageProductivity);
+
        }
+
+        UpdateStatsListDbAccess updateStatsListDbAccess=new UpdateStatsListDbAccess(context, FetchStatsListDbAccess.user_stats);
+        updateStatsListDbAccess.execute();
 
     }
 
-    public float convertTime(String time){
+    public static float convertTime(String time){
 
         float mins=0;
         String[] splited = time.split("\\s+");
