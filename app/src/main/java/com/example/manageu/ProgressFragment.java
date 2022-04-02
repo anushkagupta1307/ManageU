@@ -1,6 +1,8 @@
 package com.example.manageu;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -8,6 +10,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 
 import com.example.manageu.Dao.FetchDoneTasksDbAccess;
@@ -18,12 +21,19 @@ import com.example.manageu.Model.DoneTask;
 import com.example.manageu.Model.Task;
 import com.example.manageu.Model.User;
 
+import org.eazegraph.lib.charts.PieChart;
+import org.eazegraph.lib.models.PieModel;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class ProgressFragment extends Fragment {
 
+public static PieChart pieChart;
+public static View firstcolor,secondcolor,thirdcolor,fourthcolor,fifthcolor,sixthcolor;
+public static TextView firsttext,secondtext,thirdtext,fourthtext,fifthtext,sixthtext;
+public static TextView productivityText;
 
 
     public ProgressFragment() {
@@ -34,9 +44,34 @@ public class ProgressFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+
+        View view= inflater.inflate(R.layout.fragment_progress, container, false);
         TaskActivity.addTask.setVisibility(View.INVISIBLE);
+        pieChart = view.findViewById(R.id.piechart);
+        
+        firstcolor=view.findViewById(R.id.firstCol);
+        secondcolor=view.findViewById(R.id.secondColor);
+        thirdcolor=view.findViewById(R.id.thirdCol);
+        fourthcolor=view.findViewById(R.id.fourthColor);
+        fifthcolor=view.findViewById(R.id.fifthColor);
+        sixthcolor=view.findViewById(R.id.sixthColor);
+
+        firsttext=view.findViewById(R.id.firstText);
+        secondtext=view.findViewById(R.id.secondText);
+        thirdtext=view.findViewById(R.id.thirdText);
+        fourthtext=view.findViewById(R.id.fourthText);
+        fifthtext=view.findViewById(R.id.fifthText);
+        sixthtext=view.findViewById(R.id.sixthText);
+
+        productivityText=view.findViewById(R.id.productivityText);
+
+
+
         calculateProductivityPercentage(getContext());
-        return inflater.inflate(R.layout.fragment_progress, container, false);
+
+
+
+        return view;
     }
 
     public static void calculateProductivityPercentage(Context context){
@@ -70,6 +105,8 @@ public class ProgressFragment extends Fragment {
            float totalNetflixDone=0;
            float totalExerciseDone=0;
            float totalHobbyDone=0;
+
+
 
            for(int i=0;i<taskList.size();i++){
                switch (taskList.get(i).title){
@@ -163,6 +200,51 @@ public class ProgressFragment extends Fragment {
            }
 
            float averageProductivity=totalProductivity/count;
+
+           firsttext.setText("Study");
+           secondtext.setText("Sports");
+           thirdtext.setText("Netflix");
+           fourthtext.setText("Exercise");
+           fifthtext.setText("Hobby");
+           sixthtext.setVisibility(View.INVISIBLE);
+           String output_text_message=Integer.toString((int)averageProductivity)+"% Productivity";
+           productivityText.setText(output_text_message);
+
+
+           firstcolor.getBackground().setColorFilter(Color.parseColor("#52D726"), PorterDuff.Mode.DARKEN);
+          secondcolor.getBackground().setColorFilter(Color.parseColor("#FFEC00"), PorterDuff.Mode.DARKEN);
+           thirdcolor.getBackground().setColorFilter(Color.parseColor("#FF7300"), PorterDuff.Mode.DARKEN);
+           fourthcolor.getBackground().setColorFilter(Color.parseColor("#FF0000"), PorterDuff.Mode.DARKEN);
+           fifthcolor.getBackground().setColorFilter(Color.parseColor("#007ED6"), PorterDuff.Mode.DARKEN);
+           sixthcolor.setVisibility(View.INVISIBLE);
+
+
+           pieChart.addPieSlice(
+                   new PieModel(
+                           "Study",
+                           studyProductivity,
+                           Color.parseColor("#52D726")));
+           pieChart.addPieSlice(
+                   new PieModel(
+                           "Sports",
+                           sportsProductivity,
+                           Color.parseColor("#FFEC00")));
+           pieChart.addPieSlice(
+                   new PieModel(
+                           "Netflix",
+                           netflixProductivity,
+                           Color.parseColor("#FF7300")));
+           pieChart.addPieSlice(
+                   new PieModel(
+                           "Hobby",
+                           hobbyProductivity,
+                           Color.parseColor("#007ED6")));
+           pieChart.addPieSlice(
+                   new PieModel(
+                           "Exercise",
+                           exerciseProductivity,
+                           Color.parseColor("#FF0000")));
+           pieChart.startAnimation();
 
            System.out.println("Study Productivity"+studyProductivity);
            System.out.println("Sports Productivity"+sportsProductivity);
@@ -294,6 +376,63 @@ public class ProgressFragment extends Fragment {
                count++;
            }
            float averageProductivity=totalProductivity/count;
+
+           firsttext.setText("Work");
+           secondtext.setText("Meetings");
+           thirdtext.setText("Exercise");
+           fourthtext.setText("Hobby");
+           fifthtext.setText("Netflix");
+           sixthtext.setVisibility(View.VISIBLE);
+           sixthtext.setText("Sports");
+
+           firstcolor.getBackground().setColorFilter(Color.parseColor("#52D726"), PorterDuff.Mode.DARKEN);
+           secondcolor.getBackground().setColorFilter(Color.parseColor("#FFEC00"), PorterDuff.Mode.DARKEN);
+           thirdcolor.getBackground().setColorFilter(Color.parseColor("#FF7300"), PorterDuff.Mode.DARKEN);
+           fourthcolor.getBackground().setColorFilter(Color.parseColor("#FF0000"), PorterDuff.Mode.DARKEN);
+           fifthcolor.getBackground().setColorFilter(Color.parseColor("#007ED6"), PorterDuff.Mode.DARKEN);
+
+//           firstcolor.getBackground().setColorFilter(Color.parseColor("#73b834"), PorterDuff.Mode.LIGHTEN);
+//           secondcolor.getBackground().setColorFilter(Color.parseColor("#cfeca9"), PorterDuff.Mode.LIGHTEN);
+//           thirdcolor.getBackground().setColorFilter(Color.parseColor("#40671d"), PorterDuff.Mode.LIGHTEN);
+//           fourthcolor.getBackground().setColorFilter(Color.parseColor("#7e9567"), PorterDuff.Mode.LIGHTEN);
+//           fifthcolor.getBackground().setColorFilter(Color.parseColor("#abc194"), PorterDuff.Mode.LIGHTEN);
+           sixthcolor.setVisibility(View.VISIBLE);
+           sixthcolor.getBackground().setColorFilter(Color.parseColor("#7CDDDD"), PorterDuff.Mode.LIGHTEN);
+
+           String output_text_message=Integer.toString((int)averageProductivity)+"% Productivity";
+           productivityText.setText(output_text_message);
+
+           pieChart.addPieSlice(
+                   new PieModel(
+                           "Work",
+                           workProductivity,
+                           Color.parseColor("#52D726")));
+           pieChart.addPieSlice(
+                   new PieModel(
+                           "Meetings",
+                           meetingsProductivity,
+                           Color.parseColor("#FFEC00")));
+           pieChart.addPieSlice(
+                   new PieModel(
+                           "Exercise",
+                           exerciseProductivity,
+                           Color.parseColor("#FF7300")));
+           pieChart.addPieSlice(
+                   new PieModel(
+                           "Hobby",
+                           hobbyProductivity,
+                           Color.parseColor("#FF0000")));
+           pieChart.addPieSlice(
+                   new PieModel(
+                           "Netflix",
+                           netflixProductivity,
+                           Color.parseColor("#007ED6")));
+           pieChart.addPieSlice(
+                   new PieModel(
+                           "Sports",
+                           sportsProductivity,
+                           Color.parseColor("#7CDDDD")));
+           pieChart.startAnimation();
            System.out.println("Work Productivity"+workProductivity);
            System.out.println("Meetings Productivity"+meetingsProductivity);
            System.out.println("Sports Productivity"+sportsProductivity);
@@ -409,6 +548,55 @@ public class ProgressFragment extends Fragment {
            }
 
            float averageProductivity=totalProductivity/count;
+
+           firsttext.setText("Cooking");
+           secondtext.setText("Cleaning");
+           thirdtext.setText("Netflix");
+           fourthtext.setText("Hobby");
+           fifthtext.setText("Exercise");
+           sixthtext.setVisibility(View.INVISIBLE);
+
+           String output_text_message=Integer.toString((int)averageProductivity)+"% Productivity";
+           productivityText.setText(output_text_message);
+           firstcolor.getBackground().setColorFilter(Color.parseColor("#52D726"), PorterDuff.Mode.DARKEN);
+           secondcolor.getBackground().setColorFilter(Color.parseColor("#FFEC00"), PorterDuff.Mode.DARKEN);
+           thirdcolor.getBackground().setColorFilter(Color.parseColor("#FF7300"), PorterDuff.Mode.DARKEN);
+           fourthcolor.getBackground().setColorFilter(Color.parseColor("#FF0000"), PorterDuff.Mode.DARKEN);
+           fifthcolor.getBackground().setColorFilter(Color.parseColor("#007ED6"), PorterDuff.Mode.DARKEN);
+
+//           firstcolor.getBackground().setColorFilter(Color.parseColor("#73b834"), PorterDuff.Mode.LIGHTEN);
+//           secondcolor.getBackground().setColorFilter(Color.parseColor("#cfeca9"), PorterDuff.Mode.LIGHTEN);
+//           thirdcolor.getBackground().setColorFilter(Color.parseColor("#40671d"), PorterDuff.Mode.LIGHTEN);
+//           fourthcolor.getBackground().setColorFilter(Color.parseColor("#7e9567"), PorterDuff.Mode.LIGHTEN);
+//           fifthcolor.getBackground().setColorFilter(Color.parseColor("#abc194"), PorterDuff.Mode.LIGHTEN);
+           sixthcolor.setVisibility(View.INVISIBLE);
+
+           pieChart.addPieSlice(
+                   new PieModel(
+                           "Cooking",
+                           cookingProductivity,
+                           Color.parseColor("#52D726")));
+           pieChart.addPieSlice(
+                   new PieModel(
+                           "Cleaning",
+                           cleaningProductivity,
+                           Color.parseColor("#FFEC00")));
+           pieChart.addPieSlice(
+                   new PieModel(
+                           "Netflix",
+                           netflixProductivity,
+                           Color.parseColor("#FF7300")));
+           pieChart.addPieSlice(
+                   new PieModel(
+                           "Hobby",
+                           hobbyProductivity,
+                           Color.parseColor("#FF0000")));
+           pieChart.addPieSlice(
+                   new PieModel(
+                           "Exercise",
+                           exerciseProductivity,
+                           Color.parseColor("#007ED6")));
+           pieChart.startAnimation();
 
 
            System.out.println("Cooking Productivity"+cookingProductivity);

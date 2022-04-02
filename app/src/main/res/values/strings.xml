@@ -16,6 +16,15 @@
     <string name="add">+ Add</string>
     <string name="hint_role">Role</string>
     <string name="hint_activity">Activity</string>
+    <string name="productivity">85% Productivity</string>
+    <string name="unlock_reward">Unlock Reward</string>
+    <string name="last_3_days">Yesterday\'s</string>
+    <string name="last_6_days">Day Before Yesterday\'s</string>
+    <string name="last_9_days">2 Days Prior</string>
+    <string name="temp_message">You\'re Doing Great!! Keep Going!!</string>
+    <string name="temp_message_1">SLOW AND STEADY WINS THE RACE!</string>
+    <string name="temp_message_2">WORK HARDER! YOU\'RE ALMOST THERE</string>
+    <string name="no_log_found">No Log Found till Now!!</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
