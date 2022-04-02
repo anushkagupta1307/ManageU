@@ -2,23 +2,13 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/tasks"
-        android:title="Tasks"
+        android:id="@+id/Study"
+        android:title="Study"
         android:icon="@drawable/ic_tasks_foreground"
         />
     <item
-        android:id="@+id/progress"
-        android:title="Progress"
+        android:id="@+id/Peace"
+        android:title="Peace"
         android:icon="@drawable/ic_progress_foreground"
-        />
-    <item
-        android:id="@+id/stats"
-        android:title="Stats"
-        android:icon="@drawable/ic_stats_foreground"
-        />
-    <item
-        android:id="@+id/account"
-        android:title="Account"
-        android:icon="@drawable/ic_account_foreground"
         />
 </menu>

@@ -13,13 +13,17 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ManageU">
         <activity
+            android:name=".Music.GenreActivity"
+            android:exported="false" />
+        <activity
             android:configChanges="orientation|screenSize"
             android:name=".AddingActivityTab"
             android:exported="false" />
         <activity
             android:configChanges="orientation|screenSize"
             android:name=".TaskActivity"
-            android:exported="false" />
+            android:exported="false">
+        </activity>
         <activity
             android:configChanges="orientation|screenSize"
             android:name=".CalendarActivity"
@@ -27,6 +31,10 @@
         <activity
             android:configChanges="orientation|screenSize"
             android:name=".SignUpPage"
+            android:exported="false" />
+        <activity
+            android:name=".Music.MusicActivity"
+            android:configChanges="orientation|screenSize"
             android:exported="false" />
         <activity
             android:configChanges="orientation|screenSize"
