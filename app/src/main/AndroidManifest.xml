@@ -13,35 +13,45 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ManageU">
         <activity
-            android:configChanges="orientation|screenSize"
+            android:name=".demoact"
+            android:exported="false" />
+        <activity
+            android:name=".Music.GenreActivity"
+            android:exported="false" />
+        <activity
             android:name=".AddingActivityTab"
+            android:configChanges="orientation|screenSize"
             android:exported="false" />
         <activity
-            android:configChanges="orientation|screenSize"
             android:name=".TaskActivity"
-            android:exported="false" />
-        <activity
             android:configChanges="orientation|screenSize"
-            android:name=".CalendarActivity"
-            android:exported="false" />
-        <activity
-            android:configChanges="orientation|screenSize"
-            android:name=".SignUpPage"
-            android:exported="false" />
-        <activity
-            android:configChanges="orientation|screenSize"
-            android:name=".LoginPage"
-            android:exported="false" />
-        <activity
-            android:name=".MainActivity"
-            android:exported="true"
-            android:configChanges="orientation|screenSize">
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".CalendarActivity"
+            android:configChanges="orientation|screenSize"
+            android:exported="false" />
+        <activity
+            android:name=".SignUpPage"
+            android:configChanges="orientation|screenSize"
+            android:exported="false" />
+        <activity
+            android:name=".Music.MusicActivity"
+            android:configChanges="orientation|screenSize"
+            android:exported="false" />
+        <activity
+            android:name=".LoginPage"
+            android:configChanges="orientation|screenSize"
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity"
+            android:configChanges="orientation|screenSize"
+            android:exported="false"></activity>
 
         <meta-data
             android:name="preloaded_fonts"
