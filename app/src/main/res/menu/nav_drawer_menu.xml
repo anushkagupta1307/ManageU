@@ -13,10 +13,10 @@
         android:title="Stats" />
     <item
         android:id="@+id/i4"
-        android:title="Focus" />
+        android:title="Music" />
     <item
         android:id="@+id/i6"
-        android:title="Music" />
+        android:title="Focus" />
     <item
         android:id="@+id/i5"
         android:title="Accounts" />

@@ -223,7 +223,7 @@ public class TaskActivity extends AppCompatActivity implements NavigationView.On
                 Toast.makeText(this, "Stats", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.i4:
-                Toast.makeText(this, "Focus", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Music", Toast.LENGTH_SHORT).show();
                 Intent i = new Intent(TaskActivity.this, GenreActivity.class);
                 startActivity(i);
                 break;
