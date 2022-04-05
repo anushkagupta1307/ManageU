@@ -3,6 +3,7 @@
     package="com.example.manageu">
 
     <uses-permission android:name="android.permission.READ_CALENDAR" />
+    <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.WRITE_CALENDAR" />
 
     <application
@@ -13,37 +14,39 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ManageU">
         <activity
+            android:name=".FocusTimer.TimerActivity"
+            android:exported="false" />
+        <activity
             android:name=".Music.GenreActivity"
             android:exported="false" />
         <activity
-            android:configChanges="orientation|screenSize"
             android:name=".AddingActivityTab"
+            android:configChanges="orientation|screenSize"
             android:exported="false" />
         <activity
-            android:configChanges="orientation|screenSize"
             android:name=".TaskActivity"
-            android:exported="false">
-        </activity>
-        <activity
             android:configChanges="orientation|screenSize"
+            android:exported="false"></activity>
+        <activity
             android:name=".CalendarActivity"
+            android:configChanges="orientation|screenSize"
             android:exported="false" />
         <activity
-            android:configChanges="orientation|screenSize"
             android:name=".SignUpPage"
+            android:configChanges="orientation|screenSize"
             android:exported="false" />
         <activity
             android:name=".Music.MusicActivity"
             android:configChanges="orientation|screenSize"
             android:exported="false" />
         <activity
-            android:configChanges="orientation|screenSize"
             android:name=".LoginPage"
+            android:configChanges="orientation|screenSize"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:exported="true"
-            android:configChanges="orientation|screenSize">
+            android:configChanges="orientation|screenSize"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -24,6 +24,7 @@ import android.widget.Toast;
 import com.example.manageu.Controller.LoginController;
 import com.example.manageu.Dao.DeleteTasksDbAccess;
 import com.example.manageu.Dao.TaskDbAccess;
+import com.example.manageu.FocusTimer.TimerActivity;
 import com.example.manageu.Model.CurUser;
 import com.example.manageu.Model.Task;
 import com.example.manageu.Music.GenreActivity;
@@ -231,6 +232,11 @@ public class TaskActivity extends AppCompatActivity implements NavigationView.On
                 getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout,accountFragment).commit();
                 drawerLayout.closeDrawer(GravityCompat.START);
                 Toast.makeText(this, "Accounts", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.i6:
+                Toast.makeText(this, "Focus", Toast.LENGTH_SHORT).show();
+                Intent i2 = new Intent(TaskActivity.this, TimerActivity.class);
+                startActivity(i2);
                 break;
             default:
                 getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout,new DisplayTasks(context)).commit();

@@ -66,5 +66,8 @@ dependencies {
     //card-view
     implementation 'androidx.cardview:cardview:1.0.0'
 
+    //Progress bar
+    implementation 'me.zhanghai.android.materialprogressbar:library:1.6.1'
+
     
 }
