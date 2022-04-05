@@ -193,14 +193,14 @@
             <LinearLayout
                 android:id="@+id/logLayout"
                 android:layout_width="match_parent"
-                android:layout_height="20dp"
+                android:layout_height="30dp"
                 android:background="@color/white"
                 android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/noLogFound"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_marginLeft="20dp"
                     android:fontFamily="@font/bangers"
                     android:gravity="center"

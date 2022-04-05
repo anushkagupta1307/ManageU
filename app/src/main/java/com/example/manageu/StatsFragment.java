@@ -29,7 +29,7 @@ public class StatsFragment extends Fragment {
                              Bundle savedInstanceState) {
 
        // ProgressFragment.calculateProductivityPercentage(getContext());
-
+        TaskActivity.addTask.setVisibility(View.INVISIBLE);
         View view=inflater.inflate(R.layout.fragment_stats, container, false);
 
         FetchStatsListDbAccess fetchStatsListDbAccess=new FetchStatsListDbAccess(getContext());
@@ -214,46 +214,46 @@ public class StatsFragment extends Fragment {
                 productivityMessage1.setText("WORK HARDER! YOU'RE ALMOST THERE");
             }
 
-            if(secondlast==0)
+            if(Float.compare(secondlast,0)==0)
             {
-                productivity1.setTextColor(Color.parseColor("#FF0000"));
+                productivity2.setTextColor(Color.parseColor("#FF0000"));
                 productivityMessage2.setText("No logs Found for the day");
             }
             else if(secondlast>70)
             {
-                productivity1.setTextColor(Color.parseColor("#3CB371"));
-                productivityMessage1.setText("You're Doing Great!! Keep Going!!");
+                productivity2.setTextColor(Color.parseColor("#3CB371"));
+                productivityMessage2.setText("You're Doing Great!! Keep Going!!");
 
             }
             else if(secondlast>40)
             {
-                productivity1.setTextColor(Color.parseColor("#3CB371"));
-                productivityMessage1.setText("SLOW AND STEADY WINS THE RACE!");
+                productivity2.setTextColor(Color.parseColor("#3CB371"));
+                productivityMessage2.setText("SLOW AND STEADY WINS THE RACE!");
             }
             else{
-                productivity1.setTextColor(Color.parseColor("#FF0000"));
-                productivityMessage1.setText("WORK HARDER! YOU'RE ALMOST THERE");
+                productivity2.setTextColor(Color.parseColor("#FF0000"));
+                productivityMessage2.setText("WORK HARDER! YOU'RE ALMOST THERE");
             }
 
-            if(thirdlast==0)
+            if(Float.compare(thirdlast,0)==0)
             {
-                productivity1.setTextColor(Color.parseColor("#FF0000"));
+                productivity3.setTextColor(Color.parseColor("#FF0000"));
                 productivityMessage3.setText("No logs Found for the day");
             }
             else if(thirdlast>70)
             {
-                productivity1.setTextColor(Color.parseColor("#3CB371"));
-                productivityMessage1.setText("You're Doing Great!! Keep Going!!");
+                productivity3.setTextColor(Color.parseColor("#3CB371"));
+                productivityMessage3.setText("You're Doing Great!! Keep Going!!");
 
             }
             else if(thirdlast>=40)
             {
-                productivity1.setTextColor(Color.parseColor("#3CB371"));
-                productivityMessage1.setText("SLOW AND STEADY WINS THE RACE!");
+                productivity3.setTextColor(Color.parseColor("#3CB371"));
+                productivityMessage3.setText("SLOW AND STEADY WINS THE RACE!");
             }
             else{
-                productivity1.setTextColor(Color.parseColor("#FF0000"));
-                productivityMessage1.setText("WORK HARDER! YOU'RE ALMOST THERE");
+                productivity3.setTextColor(Color.parseColor("#FF0000"));
+                productivityMessage3.setText("WORK HARDER! YOU'RE ALMOST THERE");
             }
 
 
@@ -268,7 +268,7 @@ public class StatsFragment extends Fragment {
 
         }
 
-        TaskActivity.addTask.setVisibility(View.INVISIBLE);
+
         return view;
     }
 }
