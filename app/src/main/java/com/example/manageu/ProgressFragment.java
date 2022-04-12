@@ -1,6 +1,7 @@
 package com.example.manageu;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
@@ -10,6 +11,8 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 
@@ -35,6 +38,19 @@ public static View firstcolor,secondcolor,thirdcolor,fourthcolor,fifthcolor,sixt
 public static TextView firsttext,secondtext,thirdtext,fourthtext,fifthtext,sixthtext;
 public static TextView productivityText;
 
+public static float avgprodpassed;
+public static float studyprodpassed;
+public static int roleassigned;
+public static float workprodpassed;
+public static float meetingprodpassed;
+public static float cookingprodpassed;
+public static float cleaningprodpassed;
+
+//public static ImageView scratchimage;
+//public static TextView scratchText;
+
+public static Button productivitybutton;
+
 
     public ProgressFragment() {
 
@@ -48,6 +64,10 @@ public static TextView productivityText;
         View view= inflater.inflate(R.layout.fragment_progress, container, false);
         TaskActivity.addTask.setVisibility(View.INVISIBLE);
         pieChart = view.findViewById(R.id.piechart);
+
+
+
+
         
         firstcolor=view.findViewById(R.id.firstCol);
         secondcolor=view.findViewById(R.id.secondColor);
@@ -62,6 +82,8 @@ public static TextView productivityText;
         fourthtext=view.findViewById(R.id.fourthText);
         fifthtext=view.findViewById(R.id.fifthText);
         sixthtext=view.findViewById(R.id.sixthText);
+
+        productivitybutton=view.findViewById(R.id.productivityButton);
 
         productivityText=view.findViewById(R.id.productivityText);
 
@@ -93,6 +115,8 @@ public static TextView productivityText;
         fetchStatsListDbAccess.execute();
 
        if (loggedUser.role.equals("Student")){
+
+           roleassigned=1;
 
            float totalStudy=0;
            float totalSports=0;
@@ -158,6 +182,8 @@ public static TextView productivityText;
                }
            }
 
+
+
            System.out.println("Total Study "+totalStudy);
            System.out.println("Total Sports "+totalSports);
            System.out.println("Total Netflix "+totalNetflix);
@@ -211,6 +237,8 @@ public static TextView productivityText;
            productivityText.setText(output_text_message);
 
 
+
+
            firstcolor.getBackground().setColorFilter(Color.parseColor("#52D726"), PorterDuff.Mode.DARKEN);
           secondcolor.getBackground().setColorFilter(Color.parseColor("#FFEC00"), PorterDuff.Mode.DARKEN);
            thirdcolor.getBackground().setColorFilter(Color.parseColor("#FF7300"), PorterDuff.Mode.DARKEN);
@@ -253,11 +281,34 @@ public static TextView productivityText;
            System.out.println("Hobby Productivity "+hobbyProductivity);
            System.out.println("Average Productivity "+averageProductivity);
 
+           avgprodpassed=averageProductivity;
+           studyprodpassed=studyProductivity;
+
+           if(studyProductivity>=60f)
+           {
+               productivitybutton.setText("Productivity Reward");
+
+           }
+           else{
+               productivitybutton.setText("Productivity Tip");
+
+           }
+
+
+           productivitybutton.setOnClickListener(new View.OnClickListener() {
+               @Override
+               public void onClick(View view) {
+                   Intent intent = new Intent(context, ScratchCardUI.class);
+                   context.startActivity(intent);
+               }
+           });
+
            FetchStatsListDbAccess.user_stats.add(averageProductivity);
 
 
         }else if(loggedUser.role.equals("Working Professional"))
        {
+           roleassigned=2;
            float totalWork=0;
            float totalMeetings=0;
            float totalSports=0;
@@ -441,9 +492,34 @@ public static TextView productivityText;
            System.out.println("Hobby Productivity "+hobbyProductivity);
            System.out.println("Average Productivity "+averageProductivity);
 
+           avgprodpassed=averageProductivity;
+
+           workprodpassed=workProductivity;
+           meetingprodpassed=meetingsProductivity;
+
+
+           if(workProductivity>=60f || meetingsProductivity>=60f )
+           {
+               productivitybutton.setText("Productivity Reward");
+           }
+           else{
+               productivitybutton.setText("Productivity Tip");
+
+           }
+
+           productivitybutton.setOnClickListener(new View.OnClickListener() {
+               @Override
+               public void onClick(View view) {
+                   Intent intent = new Intent(context, ScratchCardUI.class);
+                   context.startActivity(intent);
+               }
+           });
+
            FetchStatsListDbAccess.user_stats.add(averageProductivity);
 
        }else {
+
+           roleassigned=3;
 
            float totalCooking=0;
            float totalCleaning=0;
@@ -606,6 +682,28 @@ public static TextView productivityText;
            System.out.println("Hobby Productivity "+hobbyProductivity);
            System.out.println("Average Productivity "+averageProductivity);
 
+           avgprodpassed=averageProductivity;
+
+           cookingprodpassed=cookingProductivity;
+           cleaningprodpassed=cleaningProductivity;
+
+
+           if(cookingProductivity>=60f || cleaningProductivity>=60f )
+           {
+               productivitybutton.setText("Productivity Reward");
+           }
+           else{
+               productivitybutton.setText("Productivity Tip");
+
+           }
+
+           productivitybutton.setOnClickListener(new View.OnClickListener() {
+               @Override
+               public void onClick(View view) {
+                   Intent intent = new Intent(context, ScratchCardUI.class);
+                   context.startActivity(intent);
+               }
+           });
            FetchStatsListDbAccess.user_stats.add(averageProductivity);
 
        }
