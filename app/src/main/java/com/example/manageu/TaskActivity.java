@@ -238,6 +238,11 @@ public class TaskActivity extends AppCompatActivity implements NavigationView.On
                 Intent i2 = new Intent(TaskActivity.this, TimerActivity.class);
                 startActivity(i2);
                 break;
+            case R.id.i7:
+                Toast.makeText(this, "Social Media Stats", Toast.LENGTH_SHORT).show();
+                Intent i7 = new Intent(TaskActivity.this, UsageStatsActivity.class);
+                startActivity(i7);
+                break;
             default:
                 getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout,new DisplayTasks(context)).commit();
         }

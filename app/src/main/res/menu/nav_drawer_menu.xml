@@ -18,6 +18,9 @@
         android:id="@+id/i6"
         android:title="Focus" />
     <item
+        android:id="@+id/i7"
+        android:title="Social Media Stats" />
+    <item
         android:id="@+id/i5"
         android:title="Accounts" />
 </menu>
