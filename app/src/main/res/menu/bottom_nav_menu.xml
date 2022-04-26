@@ -4,11 +4,16 @@
     <item
         android:id="@+id/Study"
         android:title="Study"
-        android:icon="@drawable/ic_tasks_foreground"
+        android:icon="@drawable/studybook"
+        />
+    <item
+        android:id="@+id/relax"
+        android:title="Relax"
+        android:icon="@drawable/relaxvect"
         />
     <item
         android:id="@+id/Peace"
         android:title="Peace"
-        android:icon="@drawable/ic_progress_foreground"
+        android:icon="@drawable/peace1"
         />
 </menu>

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.SeekBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,7 +21,7 @@ public class MusicActivity extends AppCompatActivity {
     Button start, pause, next, prev;
     SeekBar seekbar;
     MediaPlayer mediPlay;
-
+    TextView tv;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,18 +31,50 @@ public class MusicActivity extends AppCompatActivity {
         next = findViewById(R.id.nxtBtn);
         prev = findViewById(R.id.prevBut);
         seekbar = findViewById(R.id.seek_bar);
+        tv = findViewById(R.id.textView6);
         Intent intent = getIntent();
         String song = intent.getStringExtra("Song");
+        tv.setText(song);
 
-        if(song.equals("heart")){
-            mediPlay = MediaPlayer.create(this, R.raw.heart);
-            Toast.makeText(MusicActivity.this, "iff", Toast.LENGTH_SHORT).show();
 
-        }
-        else{
-            Toast.makeText(MusicActivity.this, "elsse", Toast.LENGTH_SHORT).show();
+        //// Study
+        if(song.equals("A Promise"))
+            mediPlay = MediaPlayer.create(this, R.raw.a_promise);
+        else if(song.equals("Beautiful Piano"))
+            mediPlay = MediaPlayer.create(this, R.raw.beautiful_piano);
+        else if(song.equals("Gentle Feelings"))
+            mediPlay = MediaPlayer.create(this, R.raw.gentle_feelings);
+        else if(song.equals("Morning Light"))
+            mediPlay = MediaPlayer.create(this, R.raw.morning_light);
+        else if(song.equals("Warm Memories Emotional Inspiring Piano"))
+            mediPlay = MediaPlayer.create(this, R.raw.warm_memories_emotional_inspiring_piano);
+
+            //// Relax
+        else if(song.equals("Mystique"))
+            mediPlay = MediaPlayer.create(this, R.raw.mystique);
+        else if(song.equals("Nature"))
+            mediPlay = MediaPlayer.create(this, R.raw.nature);
+        else if(song.equals("Order"))
+            mediPlay = MediaPlayer.create(this, R.raw.order);
+        else if(song.equals("Showreel"))
+            mediPlay = MediaPlayer.create(this, R.raw.showreel);
+        else if(song.equals("Space Chillout"))
+            mediPlay = MediaPlayer.create(this, R.raw.space_chillout);
+
+            //// Peace
+        else if(song.equals("Oceanus"))
+            mediPlay = MediaPlayer.create(this, R.raw.oceanus);
+        else if(song.equals("Slow Water"))
+            mediPlay = MediaPlayer.create(this, R.raw.slow_water);
+        else if(song.equals("Sunset"))
+            mediPlay = MediaPlayer.create(this, R.raw.sunset);
+        else if(song.equals("Water Drops"))
+            mediPlay = MediaPlayer.create(this, R.raw.water_drops);
+        else if(song.equals("Waves and Tears"))
+            mediPlay = MediaPlayer.create(this, R.raw.waves_and_tears);
+
+        else
             mediPlay = MediaPlayer.create(this, R.raw.kick);
-        }
 
         start.setOnClickListener(new View.OnClickListener(){
             @Override

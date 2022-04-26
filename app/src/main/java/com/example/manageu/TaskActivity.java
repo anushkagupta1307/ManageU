@@ -1,6 +1,7 @@
 package com.example.manageu;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -16,6 +17,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.CalendarContract;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -178,7 +180,32 @@ public class TaskActivity extends AppCompatActivity implements NavigationView.On
 
         setContentView(R.layout.activity_task);
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout,new DisplayTasks(context)).commit();
+        Intent i = getIntent();
+        String msg = i.getStringExtra("tab");
+
+        if(msg != null){
+            switch (msg){
+                case "1":
+                    getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout,new DisplayTasks(context)).commit();
+                    break;
+                case "2":
+                    getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout,progressFragment).commit();
+                    break;
+                case "3":
+                    getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout,statsFragment).commit();
+                    break;
+                case "4":
+                    getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout,accountFragment).commit();
+                    break;
+                default:
+                    getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout,new DisplayTasks(context)).commit();
+            }
+        }
+        else{
+            getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout,new DisplayTasks(context)).commit();
+        }
+
+
 
         drawerLayout = findViewById(R.id.my_drawer_layout);
         toggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.nav_open, R.string.nav_close);
@@ -226,7 +253,7 @@ public class TaskActivity extends AppCompatActivity implements NavigationView.On
             case R.id.i4:
                 Toast.makeText(this, "Music", Toast.LENGTH_SHORT).show();
                 Intent i = new Intent(TaskActivity.this, GenreActivity.class);
-                startActivity(i);
+                startActivityForResult(i,1);
                 break;
             case R.id.i5:
                 getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout,accountFragment).commit();
@@ -247,6 +274,41 @@ public class TaskActivity extends AppCompatActivity implements NavigationView.On
                 getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout,new DisplayTasks(context)).commit();
         }
         return true;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Log.d("aweS",requestCode+"");
+        if(requestCode ==1){
+            if(resultCode == RESULT_OK){
+                int result = data.getIntExtra("tab",0);
+                if(result == 1){
+                    getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout,new DisplayTasks(context)).commit();
+                    drawerLayout.closeDrawer(GravityCompat.START);
+                }
+                else if(result == 2){
+                    getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout,progressFragment).commit();
+                    drawerLayout.closeDrawer(GravityCompat.START);
+                }
+                else if(result == 3){
+                    getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout,statsFragment).commit();
+                    drawerLayout.closeDrawer(GravityCompat.START);
+                }
+                else if(result == 4){
+                    getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout,accountFragment).commit();
+                    drawerLayout.closeDrawer(GravityCompat.START);
+                }
+                else if(result == 5){
+                    Intent i2 = new Intent(TaskActivity.this, TimerActivity.class);
+                    startActivity(i2);
+                }
+                else if(result == 6){
+                    Intent i7 = new Intent(TaskActivity.this, UsageStatsActivity.class);
+                    startActivity(i7);
+                }
+            }
+        }
     }
 
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
