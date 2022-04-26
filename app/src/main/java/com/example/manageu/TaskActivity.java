@@ -270,6 +270,11 @@ public class TaskActivity extends AppCompatActivity implements NavigationView.On
                 Intent i7 = new Intent(TaskActivity.this, UsageStatsActivity.class);
                 startActivity(i7);
                 break;
+            case R.id.i8:
+                Toast.makeText(this, "Top Recommendations", Toast.LENGTH_SHORT).show();
+                Intent i8 = new Intent(TaskActivity.this, recommender.class);
+                startActivity(i8);
+                break;
             default:
                 getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout,new DisplayTasks(context)).commit();
         }

@@ -21,6 +21,9 @@
         android:id="@+id/i7"
         android:title="Social Media Stats" />
     <item
+        android:id="@+id/i8"
+        android:title="Top Recommendations" />
+    <item
         android:id="@+id/i5"
         android:title="Accounts" />
 </menu>
