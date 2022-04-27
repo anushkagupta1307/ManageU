@@ -15,7 +15,7 @@ public class ReminderBroadcast extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
 
-        String p = intent.getStringExtra("id");
+        int p = intent.getIntExtra("id",1);
         String title = intent.getStringExtra("title");
         String msg = intent.getStringExtra("msg");
 //        Bundle bundle = intent.getExtras();
@@ -30,7 +30,7 @@ public class ReminderBroadcast extends BroadcastReceiver {
                 .setContentText(msg)
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT);
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
-        notificationManager.notify(2,builder.build());
+        notificationManager.notify(p,builder.build());
 
 //        }
     }
