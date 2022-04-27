@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.manageu.Dao.RegistrationDbAccess;
+import com.example.manageu.Notifications.NotificationClass;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -20,12 +21,17 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+        NotificationClass noti = new NotificationClass(this);
+        noti.createNotificationChannel();
+
         login= findViewById(R.id.button);
         signup= findViewById(R.id.button2);
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                noti.scheduleNotification("","");
                 Intent loginIntent=new Intent(context, LoginPage.class);
                 context.startActivity(loginIntent);
             }
