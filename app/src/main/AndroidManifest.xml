@@ -7,6 +7,7 @@
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.WRITE_CALENDAR" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="com.android.alarm.permission.SET_ALARM" />
     <uses-permission
         android:name="android.permission.PACKAGE_USAGE_STATS"
         tools:ignore="ProtectedPermissions" />
@@ -23,6 +24,12 @@
             android:exported="false" />
         <activity
             android:name=".FocusTimer.TimerActivity"
+            android:exported="false" />
+        <activity
+            android:name=".FocusTimer.PopupActivity"
+            android:exported="false" />
+        <activity
+            android:name=".FocusTimer.SettingsActivity"
             android:exported="false" />
         <activity
             android:name=".ScratchCardUI"

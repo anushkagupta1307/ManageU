@@ -8,13 +8,12 @@ import com.example.manageu.FocusTimer.TimerActivity;
 
 public class PreferenceUtil {
 
-    private static final int Timer_default_val = 25;
+    public static int Timer_default_val = 1;
     private static final String Timer_len_ID="manageUApp_timerLengthID";
     private static final String Prev_timer_len_ID="manageUApp_PrevTimerLengthID";
     private static final String Timer_stateID = "manageUApp_timerState";
     private static final String Second_remain = "manageUApp_sec_remain";
     private static String Alarm_SetTime_ID = "manageUApp_alarm_setTime";
-
 
     public static int getTimerLen(Context context)
     {
@@ -22,13 +21,13 @@ public class PreferenceUtil {
         return pref.getInt(Timer_len_ID,Timer_default_val);
     }
 
-    public static long getPrevTimerLength(Context context)
+    public static long getPrevTimerLengthSecond(Context context)
     {
         SharedPreferences pref =  PreferenceManager.getDefaultSharedPreferences(context);
         return pref.getLong(Prev_timer_len_ID,0);
     }
 
-    public static void setPrevTimerLength(long second,Context context)
+    public static void setPrevTimerLengthSecond(long second,Context context)
     {
         SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(context).edit();
         editor.putLong(Prev_timer_len_ID,second);
@@ -78,5 +77,4 @@ public class PreferenceUtil {
         editor.apply();
 
     }
-
 }
