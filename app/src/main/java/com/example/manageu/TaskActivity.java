@@ -239,7 +239,7 @@ public class TaskActivity extends AppCompatActivity implements NavigationView.On
             case R.id.i1:
                 getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout,new DisplayTasks(context)).commit();
                 drawerLayout.closeDrawer(GravityCompat.START);
-                Toast.makeText(this, "Tasks", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Task", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.i2:
                 getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout,progressFragment).commit();
