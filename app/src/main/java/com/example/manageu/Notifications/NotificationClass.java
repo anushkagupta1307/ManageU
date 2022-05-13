@@ -73,6 +73,35 @@ public class NotificationClass {
                 cal_alarm.getTimeInMillis(),pendingIntent1);
     }
 
+    public void manualNotification(String title, String msg, String hh, String mm){
+
+        Intent intent = new Intent(mContext, ReminderBroadcast.class);
+
+        intent.putExtra("id", "3");
+        intent.putExtra("title",title);
+        intent.putExtra("msg", msg);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(mContext, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+        PendingIntent pendingIntent1 = PendingIntent.getBroadcast(mContext, 1, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+
+        AlarmManager alarmManager = (AlarmManager) mContext.getSystemService(ALARM_SERVICE);
+
+        long timeAtButtonClick = System.currentTimeMillis();
+        Date dat  = new Date();//initializes to now
+        Calendar cal_alarm = Calendar.getInstance();
+        cal_alarm.setTime(dat);
+        cal_alarm.set(Calendar.HOUR_OF_DAY, Integer.parseInt(String.valueOf(hh)));//set the alarm time
+        cal_alarm.set(Calendar.MINUTE, Integer.parseInt(String.valueOf(mm)));
+        cal_alarm.set(Calendar.SECOND,0);
+        alarmManager.set(AlarmManager.RTC_WAKEUP,
+                cal_alarm.getTimeInMillis(),pendingIntent);
+
+//        cal_alarm.set(Calendar.HOUR_OF_DAY,20);//set the alarm time
+//        cal_alarm.set(Calendar.MINUTE, 00);
+//        cal_alarm.set(Calendar.SECOND,0);
+//        alarmManager.set(AlarmManager.RTC_WAKEUP,
+//                cal_alarm.getTimeInMillis(),pendingIntent1);
+    }
+
     public void createNotificationChannel() {
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
             CharSequence name = "LemubitReminderChannel";
@@ -80,12 +109,15 @@ public class NotificationClass {
             int importance = NotificationManager.IMPORTANCE_DEFAULT;
             NotificationChannel channel = new NotificationChannel("1", name, importance);
             NotificationChannel channel2 = new NotificationChannel("2", name, importance);
+            NotificationChannel channel3 = new NotificationChannel("3", name, importance);
             channel.setDescription(description);
             channel2.setDescription(description);
+            channel3.setDescription(description);
 
             NotificationManager notificationManager = mContext.getSystemService(NotificationManager.class);
             notificationManager.createNotificationChannel(channel);
             notificationManager.createNotificationChannel(channel2);
+            notificationManager.createNotificationChannel(channel3);
         }
     }
 }

@@ -31,6 +31,7 @@ import com.example.manageu.Model.CurUser;
 import com.example.manageu.Model.Task;
 import com.example.manageu.Music.GenreActivity;
 import com.example.manageu.Music.MusicActivity;
+import com.example.manageu.Notifications.editNotification;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.navigation.NavigationView;
@@ -263,17 +264,22 @@ public class TaskActivity extends AppCompatActivity implements NavigationView.On
             case R.id.i6:
                 Toast.makeText(this, "Focus", Toast.LENGTH_SHORT).show();
                 Intent i2 = new Intent(TaskActivity.this, TimerActivity.class);
-                startActivity(i2);
+                startActivityForResult(i2,1);
                 break;
             case R.id.i7:
                 Toast.makeText(this, "Social Media Stats", Toast.LENGTH_SHORT).show();
                 Intent i7 = new Intent(TaskActivity.this, UsageStatsActivity.class);
-                startActivity(i7);
+                startActivityForResult(i7,1);
                 break;
             case R.id.i8:
                 Toast.makeText(this, "Top Recommendations", Toast.LENGTH_SHORT).show();
                 Intent i8 = new Intent(TaskActivity.this, recommender.class);
-                startActivity(i8);
+                startActivityForResult(i8,1);
+                break;
+            case R.id.i9:
+                Toast.makeText(this, "Create Reminder", Toast.LENGTH_SHORT).show();
+                Intent i9 = new Intent(TaskActivity.this, editNotification.class);
+                startActivityForResult(i9,1);
                 break;
             default:
                 getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout,new DisplayTasks(context)).commit();
@@ -285,9 +291,11 @@ public class TaskActivity extends AppCompatActivity implements NavigationView.On
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         Log.d("aweS",requestCode+"");
+//        Toast.makeText(this,String.valueOf(requestCode),Toast.LENGTH_SHORT).show();
         if(requestCode ==1){
             if(resultCode == RESULT_OK){
                 int result = data.getIntExtra("tab",0);
+
                 if(result == 1){
                     getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout,new DisplayTasks(context)).commit();
                     drawerLayout.closeDrawer(GravityCompat.START);
@@ -306,11 +314,23 @@ public class TaskActivity extends AppCompatActivity implements NavigationView.On
                 }
                 else if(result == 5){
                     Intent i2 = new Intent(TaskActivity.this, TimerActivity.class);
-                    startActivity(i2);
+                    startActivityForResult(i2,1);
                 }
                 else if(result == 6){
                     Intent i7 = new Intent(TaskActivity.this, UsageStatsActivity.class);
-                    startActivity(i7);
+                    startActivityForResult(i7,1);
+                }
+                else if(result == 7){
+                    Intent i8 = new Intent(TaskActivity.this, GenreActivity.class);
+                    startActivityForResult(i8,1);
+                }
+                else if(result == 8){
+                    Intent i9 = new Intent(TaskActivity.this, recommender.class);
+                    startActivityForResult(i9,1);
+                }
+                else if(result == 9){
+                    Intent i10 = new Intent(TaskActivity.this, editNotification.class);
+                    startActivityForResult(i10, 1);
                 }
             }
         }

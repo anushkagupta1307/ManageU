@@ -26,4 +26,7 @@
     <item
         android:id="@+id/i5"
         android:title="Accounts" />
+    <item
+        android:id="@+id/i9"
+        android:title="Create a Reminder" />
 </menu>

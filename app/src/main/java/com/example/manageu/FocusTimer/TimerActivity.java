@@ -1,7 +1,10 @@
 package com.example.manageu.FocusTimer;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -12,21 +15,39 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Vibrator;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.manageu.DisplayTasks;
+import com.example.manageu.Music.GenreActivity;
+import com.example.manageu.Notifications.editNotification;
 import com.example.manageu.R;
+import com.example.manageu.TaskActivity;
+import com.example.manageu.UsageStatsActivity;
+import com.example.manageu.recommender;
 import com.example.manageu.utils.PreferenceUtil;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.navigation.NavigationView;
 
 import java.util.Calendar;
 
 import me.zhanghai.android.materialprogressbar.MaterialProgressBar;
 
-public class TimerActivity extends AppCompatActivity {
+public class TimerActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+
+    public DrawerLayout drawerLayout;
+    public ActionBarDrawerToggle toggle;
+
+    Context context=this;
+
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
+        super.onPointerCaptureChanged(hasCapture);
+    }
 
     public enum TimerState
     {
@@ -54,6 +75,18 @@ public class TimerActivity extends AppCompatActivity {
         progressBar = findViewById(R.id.progress_bar);
         countdown = findViewById(R.id.textView_countdown);
         timer_settings = findViewById(R.id.timer_settings);
+
+
+        drawerLayout = findViewById(R.id.my_drawer_layout_music);
+        toggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.nav_open, R.string.nav_close);
+
+        NavigationView navigationView = findViewById(R.id.navView);
+        navigationView.setNavigationItemSelectedListener(this);
+
+        drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         timer_settings.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,6 +128,79 @@ public class TimerActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        switch(item.getItemId()){
+            case R.id.i1:
+                Intent i1 = new Intent(TimerActivity.this, TaskActivity.class);
+                i1.putExtra("tab",1);
+                setResult(RESULT_OK,i1);
+//                Toast.makeText(this, "Tasks", Toast.LENGTH_SHORT).show();
+                finish();
+                break;
+            case R.id.i2:
+                Intent i2 = new Intent(TimerActivity.this, TaskActivity.class);
+                i2.putExtra("tab",2);
+                setResult(RESULT_OK,i2);
+                Toast.makeText(this, "Progress", Toast.LENGTH_SHORT).show();
+                finish();
+                break;
+            case R.id.i3:
+                Intent i3 = new Intent(TimerActivity.this, TaskActivity.class);
+                i3.putExtra("tab",3);
+                setResult(RESULT_OK,i3);
+                Toast.makeText(this, "Stats", Toast.LENGTH_SHORT).show();
+                finish();
+                break;
+            case R.id.i4:
+                Toast.makeText(this, "Music", Toast.LENGTH_SHORT).show();
+                Intent i4 = new Intent(TimerActivity.this, TaskActivity.class);
+                i4.putExtra("tab",7);
+                setResult(RESULT_OK,i4);
+                finish();
+                break;
+            case R.id.i5:
+                Toast.makeText(this, "Accounts", Toast.LENGTH_SHORT).show();
+                drawerLayout.closeDrawer(GravityCompat.START);
+                Intent i5 = new Intent(TimerActivity.this, TaskActivity.class);
+                i5.putExtra("tab",4);
+                setResult(RESULT_OK,i5);
+                finish();
+                break;
+            case R.id.i6:
+                Toast.makeText(this, "Focus", Toast.LENGTH_SHORT).show();
+                drawerLayout.closeDrawer(GravityCompat.START);
+                break;
+//                Intent i5 = new Intent(TimerActivity.this, TaskActivity.class);
+//                i5.putExtra("tab",5);
+//                setResult(RESULT_OK,i5);
+//                finish();
+            case R.id.i7:
+                Intent i6 = new Intent(TimerActivity.this, TaskActivity.class);
+                i6.putExtra("tab",6);
+                setResult(RESULT_OK,i6);
+                finish();
+                break;
+            case R.id.i8:
+                Intent i7 = new Intent(TimerActivity.this, TaskActivity.class);
+                i7.putExtra("tab",8);
+                setResult(RESULT_OK,i7);
+                finish();
+                break;
+            case R.id.i9:
+                Toast.makeText(this, "Create Reminder", Toast.LENGTH_SHORT).show();
+                Intent i8 = new Intent(TimerActivity.this, TaskActivity.class);
+                i8.putExtra("tab", 9);
+                setResult(RESULT_OK,i8);
+                finish();
+                break;
+            default:
+                getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout,new DisplayTasks(context)).commit();
+        }
+        return true;
     }
 
     @Override
@@ -257,6 +363,14 @@ public class TimerActivity extends AppCompatActivity {
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         alarmManager.cancel(pendingIntent);
         PreferenceUtil.setAlarmTime(0, context);
+    }
+
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        if (toggle.onOptionsItemSelected(item)) {
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 

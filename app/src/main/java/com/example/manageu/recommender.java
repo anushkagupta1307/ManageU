@@ -1,28 +1,43 @@
 package com.example.manageu;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.manageu.Dao.FetchStatsListDbAccess;
 import com.example.manageu.Dao.UserProfileAccess;
+import com.example.manageu.FocusTimer.TimerActivity;
 import com.example.manageu.Model.User;
+import com.google.android.material.navigation.NavigationView;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 
-public class recommender extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
+public class recommender extends AppCompatActivity implements AdapterView.OnItemSelectedListener, NavigationView.OnNavigationItemSelectedListener{
 
     Spinner recommender;
     ImageView thumb1,thumb2,thumb3;
+
+    public DrawerLayout drawerLayout;
+    public ActionBarDrawerToggle toggle;
+
+    Context context=this;
 
     private String getYouTubeId (String youTubeUrl) {
         String pattern = "(?<=youtu.be/|watch\\?v=|/videos/|embed\\/)[^#\\&\\?]*";
@@ -93,6 +108,17 @@ public class recommender extends AppCompatActivity implements AdapterView.OnItem
         }
 
         recommender.setOnItemSelectedListener( recommender.this);
+
+        drawerLayout = findViewById(R.id.my_drawer_layout_music);
+        toggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.nav_open, R.string.nav_close);
+
+        NavigationView navigationView = findViewById(R.id.navView);
+        navigationView.setNavigationItemSelectedListener(this);
+
+        drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
     }
 
@@ -800,5 +826,92 @@ public class recommender extends AppCompatActivity implements AdapterView.OnItem
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
 
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        switch(item.getItemId()){
+            case R.id.i1:
+                Intent i1 = new Intent(recommender.this, TaskActivity.class);
+                i1.putExtra("tab",1);
+                setResult(RESULT_OK,i1);
+//                Toast.makeText(this, "Tasks", Toast.LENGTH_SHORT).show();
+                finish();
+                break;
+            case R.id.i2:
+                Intent i2 = new Intent(recommender.this, TaskActivity.class);
+                i2.putExtra("tab",2);
+                setResult(RESULT_OK,i2);
+                Toast.makeText(this, "Progress", Toast.LENGTH_SHORT).show();
+                finish();
+                break;
+            case R.id.i3:
+                Intent i3 = new Intent(recommender.this, TaskActivity.class);
+                i3.putExtra("tab",3);
+                setResult(RESULT_OK,i3);
+                Toast.makeText(this, "Stats", Toast.LENGTH_SHORT).show();
+                finish();
+                break;
+            case R.id.i4:
+                Toast.makeText(this, "Music", Toast.LENGTH_SHORT).show();
+                Intent i4 = new Intent(recommender.this, TaskActivity.class);
+                i4.putExtra("tab",7);
+                setResult(RESULT_OK,i4);
+                finish();
+                break;
+            case R.id.i5:
+                Toast.makeText(this, "Accounts", Toast.LENGTH_SHORT).show();
+                drawerLayout.closeDrawer(GravityCompat.START);
+                Intent i5 = new Intent(recommender.this, TaskActivity.class);
+                i5.putExtra("tab",4);
+                setResult(RESULT_OK,i5);
+                finish();
+                break;
+            case R.id.i6:
+                Intent i7 = new Intent(recommender.this, TaskActivity.class);
+                i7.putExtra("tab",5);
+                setResult(RESULT_OK,i7);
+                finish();
+                Toast.makeText(this, "Focus", Toast.LENGTH_SHORT).show();
+                break;
+//                Intent i5 = new Intent(TimerActivity.this, TaskActivity.class);
+//                i5.putExtra("tab",5);
+//                setResult(RESULT_OK,i5);
+//                finish();
+            case R.id.i7:
+                Intent i6 = new Intent(recommender.this, TaskActivity.class);
+                i6.putExtra("tab",6);
+                setResult(RESULT_OK,i6);
+                Toast.makeText(this, "Social Media Stats", Toast.LENGTH_SHORT).show();
+                finish();
+                break;
+            case R.id.i8:
+                Toast.makeText(this, "Top Recommendations", Toast.LENGTH_SHORT).show();
+                drawerLayout.closeDrawer(GravityCompat.START);
+                break;
+            case R.id.i9:
+                Toast.makeText(this, "Create Reminder", Toast.LENGTH_SHORT).show();
+                Intent i8 = new Intent(recommender.this, TaskActivity.class);
+                i8.putExtra("tab", 9);
+                setResult(RESULT_OK,  i8);
+                finish();
+                break;
+            default:
+                getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout,new DisplayTasks(context)).commit();
+        }
+        return true;
+    }
+
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
+        super.onPointerCaptureChanged(hasCapture);
+    }
+
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        if (toggle.onOptionsItemSelected(item)) {
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

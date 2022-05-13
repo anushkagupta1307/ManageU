@@ -41,6 +41,9 @@
             android:name=".Music.GenreActivity"
             android:exported="false" />
         <activity
+            android:name=".Notifications.editNotification"
+            android:exported="false" />
+        <activity
             android:name=".AddingActivityTab"
             android:configChanges="orientation|screenSize"
             android:exported="false" />
